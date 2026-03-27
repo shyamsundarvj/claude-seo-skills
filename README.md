@@ -63,8 +63,6 @@ No Terminal, no GitHub account, no app downloads needed.
 This requires a one-time manual setup.
 Full setup guide here: https://github.com/AminForou/mcp-gsc
 
-> Contact Shyam for the shared GSC credentials file needed during setup.
-
 ---
 
 ### STEP 5 — Test Everything
