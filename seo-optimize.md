@@ -89,7 +89,7 @@ Once the product is identified, load the corresponding configuration:
 - **Ahrefs mode:** `prefix`
 - **URL path filter:** `academy`
 - **Category:** IT Training / Certification / Learning
-- **Primary competitors:** Udemy, Coursera, LinkedIn Learning, IT training providers
+- **Primary competitors:** Atlassian Resources (atlassian.com/enterprise/resources), Salesforce Resources (salesforce.com/in/resources/), HubSpot Resources (hubspot.com/resources), Stripe Guides (stripe.com/in/guides)
 - **Known restrictions:** Ask user before assuming any restrictions.
 - **Brand context:** Ask user for key differentiators and any content restrictions before proceeding.
 
@@ -119,7 +119,7 @@ Once the product is identified, load the corresponding configuration:
 - **Ahrefs mode:** `prefix`
 - **URL path filter:** `tables`
 - **Category:** No-code Database / Collaborative Spreadsheet
-- **Primary competitors:** Airtable, Notion, Smartsheet, Monday.com, Coda, ClickUp, Rows
+- **Primary competitors:** Baserow, Stackby, Rows.com, Seatable, Workiom, Zapier Tables, Smartsheet, NocoDB, Grist, ClickUp
 - **Known restrictions:** Ask user before assuming any restrictions.
 - **Brand context:** Ask user for key differentiators and any content restrictions before proceeding.
 
@@ -139,7 +139,7 @@ Once the product is identified, load the corresponding configuration:
 - **Ahrefs mode:** `prefix`
 - **URL path filter:** `creator`
 - **Category:** Low-code / No-code Application Builder
-- **Primary competitors:** OutSystems, Mendix, Microsoft Power Apps, Salesforce Platform, Bubble, Betty Blocks
+- **Primary competitors:** Microsoft Power Apps, Appian, Mendix, Kissflow, OutSystems, Creatio, Monday.com, Quickbase, Quixy, Caspio, SAP Build, Nintex, Pega, ServiceNow
 - **Known restrictions:** Ask user before assuming any restrictions.
 - **Brand context:** Ask user for key differentiators and any content restrictions before proceeding.
 
@@ -169,7 +169,7 @@ Once the product is identified, load the corresponding configuration:
 - **Ahrefs mode:** `prefix`
 - **URL path filter:** `flow`
 - **Category:** Integration / Workflow Automation Platform
-- **Primary competitors:** Zapier, Make (Integromat), Workato, Tray.io, n8n, Boomi
+- **Primary competitors:** Zapier, Make.com, Power Automate, n8n, Workato
 - **Known restrictions:** Ask user before assuming any restrictions.
 - **Brand context:** Ask user for key differentiators and any content restrictions before proceeding.
 
