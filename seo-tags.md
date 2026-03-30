@@ -110,6 +110,12 @@ Display this message and wait:
 - **Organization URL:** https://www.manageengine.com/
 - **Organization logo:** https://cdn.manageengine.com/images/logo/manageengine-logo.svg
 - **Header nav structure:** Ask user for the navigation path
+- **Direct competitors (check for similar pages):**
+  - Atlassian Resources: https://www.atlassian.com/enterprise/resources
+  - Salesforce Resources: https://www.salesforce.com/in/resources/
+  - HubSpot Resources: https://www.hubspot.com/resources
+  - Stripe Guides: https://stripe.com/in/guides
+  - Ahrefs: https://ahrefs.com/
 
 ### Product 4: Zoho Bookings
 - **Site root:** `https://www.zoho.com/bookings/`
@@ -165,9 +171,16 @@ Display this message and wait:
 - **OG site_name:** Zoho Tables
 - **Header nav structure:** Ask user for the navigation path
 - **Direct competitors (check for similar pages):**
-  - Airtable: https://www.airtable.com/
-  - Notion: https://www.notion.so/
+  - Baserow: https://baserow.io/
+  - Stackby: https://stackby.com/
+  - Rows.com: https://rows.com/
+  - Seatable: https://seatable.io/
+  - Workiom: https://workiom.com/
+  - Zapier Tables: https://zapier.com/tables/
   - Smartsheet: https://www.smartsheet.com/
+  - NocoDB: https://nocodb.com/
+  - Grist: https://www.getgrist.com/
+  - ClickUp: https://clickup.com/
   - Monday.com: https://monday.com/
   - Coda: https://coda.io/
   - ClickUp: https://clickup.com/
@@ -200,9 +213,20 @@ Display this message and wait:
 - **OG site_name:** Zoho Creator
 - **Header nav structure:** Ask user for the navigation path
 - **Direct competitors (check for similar pages):**
-  - OutSystems: https://www.outsystems.com/
-  - Mendix: https://www.mendix.com/
   - Microsoft Power Apps: https://powerapps.microsoft.com/
+  - Appian: https://appian.com/
+  - Mendix: https://www.mendix.com/
+  - Kissflow: https://kissflow.com/
+  - OutSystems: https://www.outsystems.com/
+  - Creatio: https://www.creatio.com/
+  - Monday.com: https://monday.com/
+  - Quickbase: https://www.quickbase.com/
+  - Quixy: https://quixy.com/
+  - Caspio: https://www.caspio.com/
+  - SAP Build: https://www.sap.com/products/technology-platform/low-code-app-builder.html
+  - Nintex: https://www.nintex.com/
+  - Pega: https://www.pega.com/
+  - ServiceNow: https://www.servicenow.com/
   - Salesforce Platform: https://www.salesforce.com/products/platform/
   - Bubble: https://bubble.io/
 
@@ -250,7 +274,9 @@ Display this message and wait:
 - **Header nav structure:** Ask user for the navigation path
 - **Direct competitors (check for similar pages):**
   - Zapier: https://zapier.com/
-  - Make (Integromat): https://www.make.com/
+  - Make.com: https://www.make.com/
+  - Power Automate: https://powerautomate.microsoft.com/
+  - n8n: https://n8n.io/
   - Workato: https://www.workato.com/
   - n8n: https://n8n.io/
   - Boomi: https://boomi.com/
