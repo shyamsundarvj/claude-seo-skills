@@ -47,6 +47,13 @@ Display this message to the user and wait for their response:
 > | 3 | ManageEngine Academy | manageengine.com/academy/ |
 > | 4 | Zoho Bookings | zoho.com/bookings/ |
 > | 5 | Zoho RPA | zoho.com/rpa/ |
+> | 6 | Zoho Tables | zoho.com/tables/ |
+> | 7 | Zoho.com (main brand) | zoho.com/ |
+> | 8 | Zoho Creator | zoho.com/creator/ |
+> | 9 | Qntrl | qntrl.com/ |
+> | 10 | ManageEngine Insights | insights.manageengine.com/ |
+> | 11 | Zoho Flow | zoho.com/flow/ |
+> | 12 | Zoho QEngine | zoho.com/qengine/ |
 >
 > Reply with the number or product name. If your product is not listed, reply with the full URL path (e.g., `zoho.com/desk/`) and I will proceed with that property.
 
