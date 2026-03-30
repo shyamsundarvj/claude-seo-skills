@@ -85,7 +85,7 @@ Once the product is identified, load the corresponding configuration:
 - **Ahrefs mode:** `prefix`
 - **URL path filter:** `academy`
 - **Category:** IT Training / Certification / Learning
-- **Primary competitors:** Atlassian Resources (atlassian.com/enterprise/resources), Salesforce Resources (salesforce.com/in/resources/), HubSpot Resources (hubspot.com/resources), Stripe Guides (stripe.com/in/guides), Ahrefs (ahrefs.com)
+- **Primary competitors:** Atlassian Resources (atlassian.com/enterprise/resources), Salesforce Resources (salesforce.com/in/resources/), HubSpot Resources (hubspot.com/resources), Stripe Guides (stripe.com/in/guides)
 
 ### Product 4: Zoho Bookings
 - **GSC property:** `https://www.zoho.com/bookings/`

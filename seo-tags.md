@@ -115,7 +115,6 @@ Display this message and wait:
   - Salesforce Resources: https://www.salesforce.com/in/resources/
   - HubSpot Resources: https://www.hubspot.com/resources
   - Stripe Guides: https://stripe.com/in/guides
-  - Ahrefs: https://ahrefs.com/
 
 ### Product 4: Zoho Bookings
 - **Site root:** `https://www.zoho.com/bookings/`
