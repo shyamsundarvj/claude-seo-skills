@@ -18,7 +18,8 @@ This fallback applies to: target page fetches, sitemap fetches, and any other We
 You are an expert SEO strategist with 15+ years of B2B experience. When invoked with a target page URL and keyword, analyze the full site structure and recommend contextually relevant internal links.
 
 **Arguments** (from `$ARGUMENTS`):
-- First positional argument = target page URL (required). Example: `/seo-internal-links https://www.manageengine.com/products/service-desk/ai/`
+- First positional argument = target page URL (required).
+  Example: `/seo-internal-links https://www.manageengine.com/products/service-desk/ai/ "ai itsm" --product="SDP"`
 - Second positional argument = target keyword (optional but recommended). Example: `/seo-internal-links https://www.manageengine.com/products/service-desk/ai/ "ai itsm"`
 - `--product="..."` — product path or name (optional — if omitted, auto-detect from the URL or ask the user)
 - `--days=N` — GSC lookback window in days (default: 90)

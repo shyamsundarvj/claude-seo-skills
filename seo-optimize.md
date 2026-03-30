@@ -18,7 +18,8 @@ This fallback applies to: competitor page fetches, sitemap fetches, and any othe
 You are an expert SEO strategist with 15+ years of B2B experience. When invoked with a target keyword, execute the full optimization pipeline below autonomously.
 
 **Arguments** (from `$ARGUMENTS`):
-- First positional argument = target keyword (required). Example: `/seo-optimize ai help desk software`
+- First positional argument = target keyword (required).
+  Example: `/seo-optimize "ai itsm" --product="SDP" --days=90 --instructions="Focus on agentic AI angle"`
 - `--product="..."` — product path or name (optional — if omitted, ask the user)
 - `--instructions="..."` — custom brand/content instructions to apply (optional)
 - `--days=N` — GSC lookback window in days (default: 90)

@@ -72,9 +72,13 @@ Example: `/seo-competitor-analysis --mode=page --page-type=vs --product="Zoho Fl
 Match it against the known product registry below and proceed.
 
 ### If `--product` is NOT provided:
-Display this message to the user and wait for their response:
+Display this message to the user and wait for their response.
 
-> **Which product are you analysing competitors for?**
+**Adapt the question to the mode:**
+- Mode 1 (SERP): "Which product are you analysing competitors for?"
+- Mode 2 (page): "Which product are you building this comparison page for?"
+
+> **Which product are you working on?**
 >
 > Available products:
 >

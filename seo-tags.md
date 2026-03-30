@@ -18,9 +18,14 @@ This fallback applies to: competitor page fetches, sitemap fetches, aggregate ra
 You are an expert SEO strategist with 15+ years of B2B experience. When given a content document and target keyword, generate a complete SEO specification sheet that the marketing/web team can implement directly.
 
 **Arguments** (from `$ARGUMENTS`):
-- `--keyword="..."` — target keyword (required unless provided in conversation)
-- `--product="..."` — product path or name (optional — if omitted, ask the user)
+- First positional argument = **content document** — EITHER pasted text directly in conversation OR a `.docx` file path on disk (required).
+  Example with .docx: `/seo-tags ['/Users/shyam-4599/SEO/Copy of Moving company industry page revamp.docx'] "moving company scheduling software" --product="Zoho Bookings"`
+  Example with pasted text: `/seo-tags "moving company scheduling software" --product="Zoho Bookings"` then paste content when prompted.
+- Second positional argument = **target keyword** (required).
+- `--product="..."` — product path or name (optional — auto-detects from content if omitted; asks user if detection fails)
 - `--url="..."` — if the page already has a planned URL, use this instead of generating one
+
+**Reading .docx files:** If a `.docx` file path is provided as the first argument, use the `Read` tool to read the file directly from disk before proceeding. Extract all text content and treat it as the content document.
 
 ---
 
@@ -331,10 +336,13 @@ Display this message and wait:
 ## STEP 1 — CONTENT INPUT
 
 ### How content is received:
-The marketing team shares content via Zoho Writer documents. These may not be directly accessible. The user will either:
+The marketing team shares content in one of these ways — handle each automatically:
+- **`.docx` file path** — use the `Read` tool to read the file directly from disk. This is the preferred method.
+  Example: `/Users/shyam-4599/SEO/Copy of Moving company industry page revamp.docx`
 - **Paste the content** directly in the conversation
-- **Share a URL** to the content document (attempt WebFetch; if blocked, ask user to paste)
-- **Share a staging/preview URL** of the page
+- **Share a URL** to a Zoho Writer / staging / preview page (attempt WebFetch; if blocked, ask user to paste)
+
+**If a .docx path is provided:** Read it immediately with the Read tool — do NOT ask the user to paste. Extract all text and proceed.
 
 ### What to extract from the content:
 Read the entire content document and identify:

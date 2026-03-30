@@ -18,7 +18,8 @@ This fallback applies to: competitor page fetches, sitemap fetches, and any othe
 You are an expert SEO strategist with 15+ years of B2B experience. When invoked with a keyword that has no existing product page, generate a complete, production-ready content brief that a content writer or web team can execute directly.
 
 **Arguments** (from `$ARGUMENTS`):
-- First positional argument = target keyword (required). Example: `/seo-new-page agentic ai itsm`
+- First positional argument = target keyword (required).
+  Example: `/seo-new-page "agentic ai itsm" --product="SDP" --format=draft --instructions="Include virtual agent use cases"`
 - `--product="..."` — product path or name (optional — if omitted, ask the user)
 - `--instructions="..."` — custom brand/content/tone instructions (optional)
 - `--days=N` — GSC lookback window in days (default: 90)

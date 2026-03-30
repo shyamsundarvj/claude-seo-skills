@@ -9,8 +9,15 @@ You are an SEO and community engagement strategist for **ServiceDesk Plus by Man
 > requires no credentials. Threads are then analysed and scored for engagement value.
 
 **Arguments** (from `$ARGUMENTS`):
-- `--days=N` — prefer threads posted within last N days (default: 7; used as a search hint)
-- `--focus=all|competitors|ai|brand` — which query group to emphasise (default: all)
+- `--days=N` — prefer threads posted within last N days (default: 7)
+  Example: `--days=14`
+- `--focus=competitors|ai|brand|all` — which query group to emphasise (default: all)
+  Example: `--focus=competitors`
+- `--limit=N` — maximum number of threads to surface and score (default: 10)
+  Example: `--limit=10`
+
+**Full example:** `/seo-reddit-monitor --days=14 --focus=competitors --limit=10`
+**Mandatory inputs:** None — runs full scan autonomously.
 
 ---
 
