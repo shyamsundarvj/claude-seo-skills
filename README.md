@@ -76,7 +76,7 @@ Open Claude Desktop and type:
 
 ## Getting Latest Updates
 
-Whenever Shyam updates a skill, just type this in Claude Desktop:
+Whenever Shyam updates a skill, just type this in Claude code:
 
 Pull the latest changes from my claude-seo-skills repo
 and update all skill files in ~/.claude/commands/
