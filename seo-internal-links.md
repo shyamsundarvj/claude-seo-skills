@@ -60,6 +60,7 @@ Display this message and wait:
 > | 10 | ManageEngine Insights | insights.manageengine.com/ |
 > | 11 | Zoho Flow | zoho.com/flow/ |
 > | 12 | Zoho QEngine | zoho.com/qengine/ |
+> | 13 | ServiceDesk Plus MSP | manageengine.com/products/service-desk-msp/ |
 >
 > Reply with the number or product name.
 
@@ -127,8 +128,10 @@ Display this message and wait:
 - **Sitemap root:** `https://www.zoho.com/qengine/`
 - **URL path filter:** `qengine`
 
-### Product 13: Unknown / Custom
-- Ask user for sitemap URL and GSC property.
+### Product 13: ServiceDesk Plus MSP
+- **GSC property:** `https://www.manageengine.com/products/service-desk-msp/`
+- **Sitemap root:** `https://www.manageengine.com/products/service-desk-msp/`
+- **URL path filter:** `service-desk-msp`
 
 ---
 

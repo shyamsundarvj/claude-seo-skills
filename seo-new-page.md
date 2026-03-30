@@ -53,6 +53,7 @@ Display this message to the user and wait for their response:
 > | 10 | ManageEngine Insights | insights.manageengine.com/ |
 > | 11 | Zoho Flow | zoho.com/flow/ |
 > | 12 | Zoho QEngine | zoho.com/qengine/ |
+> | 13 | ServiceDesk Plus MSP | manageengine.com/products/service-desk-msp/ |
 >
 > Reply with the number or product name. If not listed, provide the full URL path.
 
@@ -169,8 +170,16 @@ Display this message to the user and wait for their response:
 - **Category:** Test Automation / QA Platform
 - **Primary competitors:** Selenium, TestComplete, Katalon, Tricentis Tosca, Mabl, BrowserStack, LambdaTest
 
-### Product 13: Unknown / Custom
-- Ask user for: product category, top 3-5 competitors, key differentiators, content restrictions, site root URL.
+### Product 13: ServiceDesk Plus MSP
+- **Site root:** `https://www.manageengine.com/products/service-desk-msp/`
+- **GSC property:** `https://www.manageengine.com/products/service-desk-msp/`
+- **Ahrefs target:** `https://www.manageengine.com/products/service-desk-msp/`
+- **Ahrefs mode:** `prefix`
+- **Organization schema name:** ManageEngine
+- **Organization URL:** https://www.manageengine.com/
+- **Organization logo:** https://cdn.manageengine.com/images/logo/manageengine-logo.svg
+- **Category:** MSP / Managed Service Provider ITSM Platform
+- **Primary competitors:** Freshservice, Jira Service Management, Autotask PSA, ConnectWise PSA, Atera, HaloPSA, Kaseya, NinjaOne, SysAid, ChangeGear
 
 ---
 

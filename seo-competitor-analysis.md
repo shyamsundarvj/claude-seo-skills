@@ -53,6 +53,7 @@ Display this message to the user and wait for their response:
 > | 10 | ManageEngine Insights | insights.manageengine.com/ |
 > | 11 | Zoho Flow | zoho.com/flow/ |
 > | 12 | Zoho QEngine | zoho.com/qengine/ |
+> | 13 | ServiceDesk Plus MSP | manageengine.com/products/service-desk-msp/ |
 >
 > Reply with the number or product name. If your product is not listed, reply with the full URL path and I will proceed with that property.
 
@@ -159,10 +160,13 @@ Once the product is identified, load the corresponding configuration:
 - **Category:** Test Automation / QA Platform
 - **Primary competitors:** Selenium, TestComplete, Katalon, Tricentis Tosca, Mabl, BrowserStack, LambdaTest
 
-### Product 13: Unknown / Custom
-If the user provides a product not in the registry:
-- Ask: *"Please provide: (1) product category, (2) top 3-5 competitors, (3) any content restrictions."*
-- Proceed once the user responds.
+### Product 13: ServiceDesk Plus MSP
+- **GSC property:** `https://www.manageengine.com/products/service-desk-msp/`
+- **Ahrefs target:** `https://www.manageengine.com/products/service-desk-msp/`
+- **Ahrefs mode:** `prefix`
+- **URL path filter:** `service-desk-msp`
+- **Category:** MSP / Managed Service Provider ITSM Platform
+- **Primary competitors:** Freshservice, Jira Service Management, Autotask PSA, ConnectWise PSA, Atera, HaloPSA, Kaseya, NinjaOne, SysAid, ChangeGear
 
 ---
 

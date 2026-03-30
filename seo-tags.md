@@ -50,6 +50,7 @@ Display this message and wait:
 > | 10 | ManageEngine Insights | insights.manageengine.com/ |
 > | 11 | Zoho Flow | zoho.com/flow/ |
 > | 12 | Zoho QEngine | zoho.com/qengine/ |
+> | 13 | ServiceDesk Plus MSP | manageengine.com/products/service-desk-msp/ |
 >
 > Reply with the number or product name.
 
@@ -302,8 +303,28 @@ Display this message and wait:
   - Mabl: https://www.mabl.com/
   - BrowserStack: https://www.browserstack.com/
 
-### Product 13: Unknown / Custom
-- Ask user for all organization details, logo URL, and nav structure.
+### Product 13: ServiceDesk Plus MSP
+- **Site root:** `https://www.manageengine.com/products/service-desk-msp/`
+- **Ahrefs target:** `https://www.manageengine.com/products/service-desk-msp/`
+- **Ahrefs mode:** `prefix`
+- **GSC property:** `https://www.manageengine.com/products/service-desk-msp/`
+- **Organization schema name:** ManageEngine
+- **Organization URL:** https://www.manageengine.com/
+- **Organization logo:** https://cdn.manageengine.com/images/logo/manageengine-logo.svg
+- **OG image base path:** https://www.manageengine.com/products/service-desk-msp/
+- **OG site_name:** ServiceDesk Plus MSP
+- **Header nav structure:** Ask user for the navigation path
+- **Direct competitors (check for similar pages):**
+  - Freshservice: https://www.freshworks.com/managed-service-providers/
+  - Jira Service Management: https://www.atlassian.com/software/jira/service-management
+  - Autotask PSA: https://www.datto.com/products/autotask-psa/
+  - ConnectWise PSA: https://www.connectwise.com/platform/business-management/psa
+  - Atera: https://www.atera.com/
+  - HaloPSA: https://halopsa.com/
+  - Kaseya: https://www.kaseya.com/
+  - NinjaOne: https://www.ninjaone.com/
+  - SysAid: https://www.sysaid.com/
+  - ChangeGear: https://www.changegear.com/
 
 ---
 

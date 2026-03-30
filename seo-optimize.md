@@ -54,6 +54,7 @@ Display this message to the user and wait for their response:
 > | 10 | ManageEngine Insights | insights.manageengine.com/ |
 > | 11 | Zoho Flow | zoho.com/flow/ |
 > | 12 | Zoho QEngine | zoho.com/qengine/ |
+> | 13 | ServiceDesk Plus MSP | manageengine.com/products/service-desk-msp/ |
 >
 > Reply with the number or product name. If your product is not listed, reply with the full URL path (e.g., `zoho.com/desk/`) and I will proceed with that property.
 
@@ -183,11 +184,16 @@ Once the product is identified, load the corresponding configuration:
 - **Known restrictions:** Ask user before assuming any restrictions.
 - **Brand context:** Ask user for key differentiators and any content restrictions before proceeding.
 
-### Product 13: Unknown / Custom
-If the user provides a product path not in the registry above:
-- Set GSC property and Ahrefs target to the provided URL
-- Ask the user: *"I don't have brand context for this product yet. Please provide: (1) product category, (2) top 3-5 competitors, (3) key differentiators, (4) any content restrictions I should know about."*
-- Proceed once the user responds.
+### Product 13: ServiceDesk Plus MSP
+- **Site root:** `https://www.manageengine.com/products/service-desk-msp/`
+- **GSC property:** `https://www.manageengine.com/products/service-desk-msp/`
+- **Ahrefs target:** `https://www.manageengine.com/products/service-desk-msp/`
+- **Ahrefs mode:** `prefix`
+- **Organization schema name:** ManageEngine
+- **Organization URL:** https://www.manageengine.com/
+- **Organization logo:** https://cdn.manageengine.com/images/logo/manageengine-logo.svg
+- **Category:** MSP / Managed Service Provider ITSM Platform
+- **Primary competitors:** Freshservice, Jira Service Management, Autotask PSA, ConnectWise PSA, Atera, HaloPSA, Kaseya, NinjaOne, SysAid, ChangeGear
 
 ---
 
