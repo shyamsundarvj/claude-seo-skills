@@ -32,7 +32,9 @@ When referencing or writing about competitors, always follow these standards:
 You are an expert SEO strategist with 15+ years of B2B experience. When invoked with a target keyword, execute the full competitor analysis pipeline below autonomously.
 
 **Arguments** (from `$ARGUMENTS`):
-- First positional argument = target keyword (required). Example: `/seo-competitor-analysis ai help desk software`
+- First positional argument = target keyword (required — for SERP analysis mode).
+  Example (SERP analysis): `/seo-competitor-analysis "itsm" --product="SDP" --days=90 --top=10`
+  Example (comparison page): `/seo-competitor-analysis --mode=page --page-type=vs --product="Zoho Flow" --competitor="Zapier"`
 - `--product="..."` — product path or name (optional — if omitted, ask the user)
 - `--days=N` — GSC lookback window in days (default: 90)
 - `--top=N` — number of SERP results to analyze (default: 10)
@@ -55,7 +57,7 @@ Example: `/seo-competitor-analysis "ai help desk software" --product="ServiceDes
 ### Mode 2: Comparison Page Generation (`--mode=page`)
 Triggered when: user specifies `--mode=page`, OR uses phrases like "generate a vs page", "create an alternatives page", "build a comparison page", "write a best tools roundup".
 Example: `/seo-competitor-analysis --mode=page --page-type=vs --product="Zoho Flow" --competitor="Zapier"`
-→ Skip to the **COMPARISON PAGE GENERATION** section after the product registry.
+→ **Always run STEP 0 first** (product resolution — ask if `--product` not provided), then proceed to the **COMPARISON PAGE GENERATION** section.
 
 **If mode is unclear**, ask:
 > Are you looking to **analyse competitors for a keyword** (SERP analysis), or **generate a comparison/alternatives page** (page builder)?
