@@ -255,10 +255,13 @@ Display this message and wait:
 - **Organization logo:** https://cdn.manageengine.com/images/logo/manageengine-logo.svg
 - **Header nav structure:** Ask user for the navigation path
 - **Direct competitors (check for similar pages):**
-  - Spiceworks Insights: https://community.spiceworks.com/
+  - IBM Think: https://www.ibm.com/think
+  - McKinsey Tech & AI Insights: https://www.mckinsey.com/capabilities/tech-and-ai/our-insights
   - TechTarget: https://www.techtarget.com/
-  - CIO.com: https://www.cio.com/
-  - ComputerWeekly: https://www.computerweekly.com/
+  - IDC: https://www.idc.com/
+  - Internet Society: https://www.internetsociety.org/
+  - Substack: https://substack.com/
+  - DLA Piper Data Protection: https://www.dlapiperdataprotection.com/
 
 ### Product 11: Zoho Flow
 - **Site root:** `https://www.zoho.com/flow/`

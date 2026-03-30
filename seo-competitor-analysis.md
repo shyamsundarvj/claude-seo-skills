@@ -141,7 +141,7 @@ Once the product is identified, load the corresponding configuration:
 - **Ahrefs mode:** `domain`
 - **URL path filter:** `insights.manageengine.com`
 - **Category:** IT Thought Leadership / Content Hub
-- **Primary competitors:** Spiceworks Insights, TechTarget, CIO.com, ComputerWeekly, BetaNews
+- **Primary competitors:** IBM Think (ibm.com/think), McKinsey Tech & AI Insights (mckinsey.com), TechTarget (techtarget.com), IDC (idc.com), Internet Society (internetsociety.org), Substack (substack.com), DLA Piper Data Protection (dlapiperdataprotection.com)
 
 ### Product 11: Zoho Flow
 - **GSC property:** `https://www.zoho.com/flow/`
