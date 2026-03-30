@@ -15,6 +15,20 @@ This fallback applies to: competitor page fetches, sitemap fetches, and any othe
 
 ---
 
+## COMPETITOR MENTION GUIDELINES (applies to all analysis and page generation)
+
+When referencing or writing about competitors, always follow these standards:
+
+- **Accuracy first:** Every feature claim must be verifiable from a public source (competitor website, documentation, or review platform). Never guess.
+- **No false claims:** Do not make misleading statements about competitor limitations. If uncertain, mark as "Not publicly confirmed."
+- **Pricing accuracy:** Always include "as of [date]" on any pricing data. Link to source.
+- **Balanced presentation:** Acknowledge competitor strengths honestly — one-sided analysis is less credible and less useful.
+- **Disclose affiliation:** When generating comparison pages, clearly state which product is ours.
+- **Feature verification:** Where possible, test or cite official documentation — not third-party assumptions.
+- **Cite sources:** Link to competitor website, review sites (G2, Capterra), or official documentation for each claim.
+
+---
+
 You are an expert SEO strategist with 15+ years of B2B experience. When invoked with a target keyword, execute the full competitor analysis pipeline below autonomously.
 
 **Arguments** (from `$ARGUMENTS`):
@@ -22,6 +36,29 @@ You are an expert SEO strategist with 15+ years of B2B experience. When invoked 
 - `--product="..."` — product path or name (optional — if omitted, ask the user)
 - `--days=N` — GSC lookback window in days (default: 90)
 - `--top=N` — number of SERP results to analyze (default: 10)
+- `--mode=serp` — SERP analysis mode (default)
+- `--mode=page` — Comparison page generation mode (generate "X vs Y", "Alternatives to X", "Best Tools" pages)
+- `--page-type=vs|alternatives|roundup|matrix` — type of comparison page to generate (used with `--mode=page`)
+- `--competitor="..."` — competitor name or URL (used with `--mode=page`)
+
+---
+
+## MODE SELECTION
+
+**Before executing**, determine which mode to run:
+
+### Mode 1: SERP Analysis (default — `--mode=serp`)
+Triggered when: user provides a **target keyword** as the first argument.
+Example: `/seo-competitor-analysis "ai help desk software" --product="ServiceDesk Plus"`
+→ Run Steps 0–8 below (full SERP pipeline + content gap + roadmap).
+
+### Mode 2: Comparison Page Generation (`--mode=page`)
+Triggered when: user specifies `--mode=page`, OR uses phrases like "generate a vs page", "create an alternatives page", "build a comparison page", "write a best tools roundup".
+Example: `/seo-competitor-analysis --mode=page --page-type=vs --product="Zoho Flow" --competitor="Zapier"`
+→ Skip to the **COMPARISON PAGE GENERATION** section after the product registry.
+
+**If mode is unclear**, ask:
+> Are you looking to **analyse competitors for a keyword** (SERP analysis), or **generate a comparison/alternatives page** (page builder)?
 
 ---
 
@@ -444,6 +481,8 @@ H1: [text]
 - Case studies: [yes/no]
 - Review scores: [yes/no — e.g., "G2 4.5/5"]
 - Awards/certifications: [yes/no — which ones]
+- Last reviewed / last updated date visible: [yes/no — what date shown]
+- Methodology disclosure present: [yes/no — e.g., "how we tested", "how this comparison was conducted"]
 
 #### CTAs and conversion
 - Primary CTA: [exact text]
@@ -483,11 +522,11 @@ H1: [text]
 
 | Topic | #1 | #2 | #3 | #4 | #5 | #6 | #7 | #8 | #9 | #10 | [PRODUCT] |
 |-------|----|----|----|----|----|----|----|----|----|----|-----------|
-| [topic 1] | Y/N | | | | | | | | | | |
+| [topic 1] | ✅/❌/⚠️ | | | | | | | | | | |
 | [topic 2] | | | | | | | | | | | |
 | ... | | | | | | | | | | | |
 
-*(List every unique topic found across all 10 pages. Mark Y if covered, N if not.)*
+*(List every unique topic found across all 10 pages. Mark ✅ if fully covered, ❌ if absent, ⚠️ if partially covered.)*
 
 ### C. Trust signal comparison
 
@@ -498,6 +537,8 @@ H1: [text]
 | Case studies | | | | | |
 | Review scores | | | | | |
 | Stats with sources | | | | | |
+| Last updated date | | | | | |
+| Methodology disclosure | | | | | |
 
 ### D. Title tag comparison
 
@@ -533,6 +574,8 @@ Compare the product's page (fetched in Step 4) against every topic, heading, and
 - **Trust signal gaps:** Analyst badges, review scores, certifications displayed on competitor pages but not on product page
 - **Visual/media gaps:** Videos, diagrams, interactive elements competitors have
 - **AI Overview gaps:** Whether product is cited in Google's AI Overview; if not, what formatting changes would improve citation chances
+- **Comparison & alternatives page gaps:** Do competitors have dedicated "X vs Y", "Alternatives to X", or "Best [Category] Tools" pages ranking for comparison-intent keywords that we don't? Check for: `[our product] vs [competitor]`, `[competitor] alternative`, `best [category] tools`. Each missing page type is a separate gap task.
+- **Trust & freshness gaps:** Does our page show a visible "last updated" date? Do we disclose how our comparison was conducted? Competitors that show these signals gain E-E-A-T credibility.
 
 **Output each gap as a numbered task the marketing team can directly act on:**
 
@@ -544,7 +587,7 @@ Compare the product's page (fetched in Step 4) against every topic, heading, and
 | **Why** | [One sentence in plain language — e.g., "3 of the top 5 pages have this section. Google expects it for this keyword. Also captures 500 searches/month for 'what is an IT service'."] |
 | **What's there now** | [Current state — "Nothing — missing entirely" / "Mentioned in one sentence under [section], but needs its own heading" / "Partially covered but missing [specific detail]"] |
 | **Who does it well** | [Competitor name + position — e.g., "Atlassian (#6) — dedicated H2 with examples"] |
-| **Content guidance** | [Specific writing guidance: word count, key points to cover, whether to include a table/list/comparison, tone. If a comparison table is needed, show the suggested column headers.] |
+| **Content guidance** | [Specific writing guidance: word count, key points to cover, whether to include a table/list/comparison, tone. If a comparison table is needed, show the suggested column headers. If a new comparison/alternatives page is recommended, include the suggested title tag using these formulas: **vs page:** `[A] vs [B]: [Key Differentiator] ([Year])` · **alternatives page:** `[N] Best [A] Alternatives in [Year] (Free & Paid)` · **roundup:** `[N] Best [Category] Tools in [Year], Compared & Ranked`] |
 | **Effort** | Low / Medium / High |
 | **Priority** | P1 (do first) / P2 (do next) |
 
@@ -563,6 +606,56 @@ Compare the product's page (fetched in Step 4) against every topic, heading, and
 | Page | Ranks at | Page type | Are we mentioned? | What to do |
 |------|----------|-----------|-------------------|------------|
 | [URL] | #[X] | [Listicle / Guide / Review] | No | [e.g., "Contact editors at [site] — they list 3 competitors but not us"] |
+
+### Schema Markup Templates (for dev team — copy-paste ready)
+
+When schema gaps are identified in the analysis above, use these ready-to-use JSON-LD templates:
+
+#### Product + AggregateRating (for product/feature pages)
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "[Product Name]",
+  "description": "[Product Description]",
+  "brand": { "@type": "Brand", "name": "[Brand Name]" },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "[Rating]",
+    "reviewCount": "[Count]",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+}
+```
+
+#### SoftwareApplication (for software comparison pages)
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "[Software Name]",
+  "applicationCategory": "[Category]",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "[Price]", "priceCurrency": "USD" }
+}
+```
+
+#### ItemList (for alternatives/roundup pages)
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Best [Category] Tools [Year]",
+  "itemListOrder": "https://schema.org/ItemListOrderDescending",
+  "numberOfItems": "[Count]",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "[Product]", "url": "[URL]" }
+  ]
+}
+```
+
+---
 
 ### Task priority summary
 
@@ -691,10 +784,213 @@ Keywords the top 10 pages also rank for that [PRODUCT NAME] should target on the
 |---------|--------|-----|-------------------|-------------|
 | [from Ahrefs related/matching terms] | | | [Yes — position X / No] | [Target on same page / Create new page] |
 
+### Comparison Intent Keyword Opportunities
+
+Specifically check for these high-converting comparison-intent patterns — each represents a potential new page:
+
+| Pattern | Example for this product | Volume signal | Page type to create |
+|---------|--------------------------|---------------|---------------------|
+| `[our product] vs [competitor]` | e.g., "Zoho Flow vs Zapier" | High | X vs Y comparison page |
+| `[competitor] alternative` | e.g., "Zapier alternative" | High | Alternatives to X page |
+| `[competitor] alternatives [year]` | e.g., "Zapier alternatives 2026" | High | Alternatives listicle |
+| `best [category] tools` | e.g., "best workflow automation tools" | High | Best-of roundup |
+| `[our product] vs [competitor] pricing` | e.g., "Zoho Flow vs Make.com pricing" | Medium | Pricing comparison page |
+| `[our product] vs [competitor] for [use case]` | e.g., "Zoho Flow vs Zapier for ecommerce" | Medium | Use-case comparison page |
+| `is [competitor] better than [our product]` | e.g., "is Zapier better than Zoho Flow" | Medium | FAQ/comparison page |
+| `[our product] review [year]` | e.g., "Zoho Flow review 2026" | Medium | Review/editorial page |
+
+For each pattern found with significant volume: add as a **New Page** opportunity in the Roadmap Phase 1 or Phase 2 tasks, using the title tag formulas from Section 6.
+
 ---
 
 *Generated by /seo-competitor-analysis — ManageEngine / Zoho SEO Team*
 *Product: [PRODUCT NAME] | Keyword: [TARGET KEYWORD] | Date: [today's date]*
+
+---
+
+## COMPARISON PAGE GENERATION MODE (`--mode=page`)
+
+> **Skip to here when** the user asks to generate a vs page, alternatives page, roundup, or comparison matrix — instead of running the SERP analysis pipeline.
+
+### Step A — Identify Page Type and Inputs
+
+Ask the user if not provided via arguments:
+
+> **What type of comparison page are you building?**
+>
+> | # | Page Type | Example keyword targeted |
+> |---|-----------|--------------------------|
+> | 1 | X vs Y — head-to-head comparison | "[Our Product] vs [Competitor]" |
+> | 2 | Alternatives to X — listicle | "[Competitor] alternatives [year]" |
+> | 3 | Best [Category] Tools — roundup | "best [category] software [year]" |
+> | 4 | Feature matrix — multi-product comparison table | "[category] comparison chart" |
+>
+> Also confirm: **Which product is ours?** (from product registry) and **which competitor(s)** are we comparing against?
+
+---
+
+### Step B — Keyword Research for the Comparison Page
+
+```
+Tool: keywords-explorer-overview
+keywords: [our product] vs [competitor]
+country: us
+```
+```
+Tool: keywords-explorer-matching-terms
+keyword: [competitor] alternative
+country: us
+```
+
+Extract: search volume, KD, traffic potential, and related long-tail variants.
+
+**Keyword targeting by page type:**
+
+| Page Type | Primary keyword formula | Secondary keywords |
+|-----------|------------------------|--------------------|
+| X vs Y | `[A] vs [B] [year]` | `[A] vs [B] pricing`, `[A] vs [B] for [use case]` |
+| Alternatives | `[N] best [A] alternatives [year]` | `[A] alternative`, `[competitor] vs [A]` |
+| Best Tools | `best [category] tools [year]` | `top [category] software`, `[category] comparison` |
+| Matrix | `[category] comparison chart` | `[category] software comparison` |
+
+---
+
+### Step C — Fetch Competitor Pages
+
+For the competitor(s) being compared, WebFetch their main product page and any existing comparison pages:
+- Their homepage / product page
+- Any "[competitor] vs [our product]" page they already have
+- Their G2 / Capterra profile page
+
+Extract: features list, pricing, key differentiators, trust signals, CTAs.
+
+---
+
+### Step D — Generate the Comparison Page
+
+Output the full page in this structure:
+
+---
+
+#### Page: [PAGE TYPE] — [Our Product] vs [Competitor] / Alternatives to [Competitor]
+
+**Target keyword:** [primary keyword]
+**Secondary keywords:** [list]
+**Suggested URL slug:** `/[product-path]/[our-product]-vs-[competitor]/` or `/[product-path]/[competitor]-alternatives/`
+**Minimum word count:** 1,500 words
+
+---
+
+**Suggested title tag:**
+- vs page: `[A] vs [B]: [Key Differentiator] ([Year])`
+- alternatives page: `[N] Best [A] Alternatives in [Year] (Free & Paid)`
+- roundup: `[N] Best [Category] Tools in [Year], Compared & Ranked`
+
+**Suggested H1:** [Match title intent — under 70 characters — include primary keyword naturally]
+
+**Meta description:** [155 chars max — include primary keyword + clear value prop]
+
+---
+
+##### Page Structure
+
+**Above fold:**
+- Brief 2–3 sentence summary of the comparison with primary CTA ("Try [Our Product] free")
+- Quick verdict box (for vs pages): "Best for [use case] → [Product]"
+
+**Feature comparison table:**
+
+| Feature | [Our Product] | [Competitor A] | [Competitor B] |
+|---------|:-------------:|:--------------:|:--------------:|
+| [Feature 1] | ✅ | ✅ | ❌ |
+| [Feature 2] | ✅ | ⚠️ Partial | ✅ |
+| [Feature 3] | ✅ | ❌ | ❌ |
+| Free tier | ✅ | ❌ | ✅ |
+| Pricing (from) | $X/mo | $Y/mo | $Z/mo |
+
+*All data verified from public sources. Pricing as of [date]. [Link to sources.]*
+
+**Section breakdown** (generate full content for each):
+1. Introduction — what this comparison covers and who it's for
+2. [Our Product] overview — features, strengths, ideal use case
+3. [Competitor] overview — features, strengths, ideal use case (balanced, accurate)
+4. Head-to-head: [Key differentiator 1]
+5. Head-to-head: [Key differentiator 2]
+6. Head-to-head: Pricing
+7. Who should choose [Our Product] — specific use cases and personas
+8. Who should choose [Competitor] — honest recommendation (builds trust)
+9. FAQ section (minimum 5 questions matching People Also Ask)
+10. Final verdict + CTA
+
+**CTA placement:**
+- Above fold: primary CTA — "Try [Our Product] free"
+- After comparison table: "See why teams switch from [Competitor] to [Our Product]"
+- Bottom of page: final CTA — "Start your free trial — no credit card required"
+- Do NOT place aggressive CTAs inside competitor description sections (reduces trust)
+
+**Social proof to include:**
+- G2 / Capterra rating with source link
+- Testimonial from a customer who switched from the competitor
+- "[N] teams switched from [Competitor] to [Our Product] in [year]" if data available
+
+**Trust signals:**
+- "Last updated: [date]" — visible above the fold or in the intro
+- Author name + role
+- "How we conducted this comparison" methodology note (1–2 sentences)
+- Source links for all competitor feature claims
+
+---
+
+##### Schema Markup to Add
+
+For **vs / alternatives pages** — use `SoftwareApplication` + `FAQPage`:
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "[Our Product]",
+  "applicationCategory": "[Category]",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "[G2 Rating]",
+    "reviewCount": "[G2 Review Count]"
+  }
+}
+```
+
+For **roundup pages** — use `ItemList`:
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Best [Category] Tools [Year]",
+  "numberOfItems": "[N]",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "[Product]", "url": "[URL]" }
+  ]
+}
+```
+
+---
+
+##### Internal Linking Plan
+
+- Link from our main product page to this comparison page
+- Cross-link between related comparison pages (e.g., "Zoho Flow vs Zapier" links to "Zoho Flow vs Make.com")
+- Link to feature-specific pages when discussing individual features
+- Add breadcrumb: Home > [Product] > Comparisons > [This Page]
+- Add "Related comparisons" section at bottom
+
+---
+
+##### Error Handling
+
+| Scenario | Action |
+|----------|--------|
+| Competitor URL unreachable | Note which URLs failed. Proceed with available data, mark gaps as "Not publicly available" |
+| Competitor pricing not public | Use "Contact for pricing" — never guess |
+| No feature overlap found | Report this clearly. Suggest pivoting to a category roundup format instead |
+| Competitor has a "[Competitor] vs [Our Product]" page already | Fetch and analyse it — understand how they frame the comparison, then counter strategically |
 
 ---
 
@@ -705,6 +1001,9 @@ After outputting the full report, inform the user:
 > **Your competitor analysis is ready.** You can now:
 > - "Deep dive into [competitor name]'s page"
 > - "Compare only the top 3 pages in detail"
+> - "Generate a vs page for [our product] vs [competitor]"
+> - "Generate an alternatives page for [competitor]"
+> - "Generate a best tools roundup for [category]"
 > - "Run /seo-optimize for this keyword based on these findings"
 > - "Analyse a different keyword"
 > - "Switch to a different product"
