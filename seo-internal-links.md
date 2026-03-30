@@ -85,7 +85,42 @@ Display this message and wait:
 - **Sitemap root:** `https://www.zoho.com/rpa/`
 - **URL path filter:** `rpa`
 
-### Product 6: Unknown / Custom
+### Product 6: Zoho Tables
+- **GSC property:** `https://www.zoho.com/tables/`
+- **Sitemap root:** `https://www.zoho.com/tables/`
+- **URL path filter:** `tables`
+
+### Product 7: Zoho.com (main brand)
+- **GSC property:** `https://www.zoho.com/`
+- **Sitemap root:** `https://www.zoho.com/`
+- **URL path filter:** `zoho.com`
+
+### Product 8: Zoho Creator
+- **GSC property:** `https://www.zoho.com/creator/`
+- **Sitemap root:** `https://www.zoho.com/creator/`
+- **URL path filter:** `creator`
+
+### Product 9: Qntrl
+- **GSC property:** `https://www.qntrl.com/`
+- **Sitemap root:** `https://www.qntrl.com/`
+- **URL path filter:** `qntrl.com`
+
+### Product 10: ManageEngine Insights
+- **GSC property:** `https://insights.manageengine.com/`
+- **Sitemap root:** `https://insights.manageengine.com/`
+- **URL path filter:** `insights.manageengine.com`
+
+### Product 11: Zoho Flow
+- **GSC property:** `https://www.zoho.com/flow/`
+- **Sitemap root:** `https://www.zoho.com/flow/`
+- **URL path filter:** `flow`
+
+### Product 12: Zoho QEngine
+- **GSC property:** `https://www.zoho.com/qengine/`
+- **Sitemap root:** `https://www.zoho.com/qengine/`
+- **URL path filter:** `qengine`
+
+### Product 13: Unknown / Custom
 - Ask user for sitemap URL and GSC property.
 
 ---

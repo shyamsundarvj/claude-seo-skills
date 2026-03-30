@@ -146,7 +146,128 @@ Display this message and wait:
   - Blue Prism: https://www.blueprism.com/
   - Zapier: https://zapier.com/
 
-### Product 6: Unknown / Custom
+### Product 6: Zoho Tables
+- **Site root:** `https://www.zoho.com/tables/`
+- **Ahrefs target:** `https://www.zoho.com/tables/`
+- **Ahrefs mode:** `prefix`
+- **GSC property:** `https://www.zoho.com/tables/`
+- **Organization schema name:** Zoho Corporation
+- **Organization URL:** https://www.zoho.com/
+- **Organization logo:** https://www.zohowebstatic.com/sites/zweb/images/commonroot/zoho-logo-web.svg
+- **OG image base path:** https://www.zohowebstatic.com/sites/zweb/images/tables/
+- **OG site_name:** Zoho Tables
+- **Header nav structure:** Ask user for the navigation path
+- **Direct competitors (check for similar pages):**
+  - Airtable: https://www.airtable.com/
+  - Notion: https://www.notion.so/
+  - Smartsheet: https://www.smartsheet.com/
+  - Monday.com: https://monday.com/
+  - Coda: https://coda.io/
+  - ClickUp: https://clickup.com/
+
+### Product 7: Zoho.com (main brand)
+- **Site root:** `https://www.zoho.com/`
+- **Ahrefs target:** `https://www.zoho.com/`
+- **Ahrefs mode:** `domain`
+- **GSC property:** `https://www.zoho.com/`
+- **Organization schema name:** Zoho Corporation
+- **Organization URL:** https://www.zoho.com/
+- **Organization logo:** https://www.zohowebstatic.com/sites/zweb/images/commonroot/zoho-logo-web.svg
+- **Header nav structure:** Ask user for the navigation path
+- **Direct competitors (check for similar pages):**
+  - Salesforce: https://www.salesforce.com/
+  - HubSpot: https://www.hubspot.com/
+  - Microsoft 365: https://www.microsoft.com/en-us/microsoft-365
+  - Google Workspace: https://workspace.google.com/
+  - Freshworks: https://www.freshworks.com/
+
+### Product 8: Zoho Creator
+- **Site root:** `https://www.zoho.com/creator/`
+- **Ahrefs target:** `https://www.zoho.com/creator/`
+- **Ahrefs mode:** `prefix`
+- **GSC property:** `https://www.zoho.com/creator/`
+- **Organization schema name:** Zoho Corporation
+- **Organization URL:** https://www.zoho.com/
+- **Organization logo:** https://www.zohowebstatic.com/sites/zweb/images/commonroot/zoho-logo-web.svg
+- **OG image base path:** https://www.zohowebstatic.com/sites/zweb/images/creator/
+- **OG site_name:** Zoho Creator
+- **Header nav structure:** Ask user for the navigation path
+- **Direct competitors (check for similar pages):**
+  - OutSystems: https://www.outsystems.com/
+  - Mendix: https://www.mendix.com/
+  - Microsoft Power Apps: https://powerapps.microsoft.com/
+  - Salesforce Platform: https://www.salesforce.com/products/platform/
+  - Bubble: https://bubble.io/
+
+### Product 9: Qntrl
+- **Site root:** `https://www.qntrl.com/`
+- **Ahrefs target:** `https://www.qntrl.com/`
+- **Ahrefs mode:** `domain`
+- **GSC property:** `https://www.qntrl.com/`
+- **Organization schema name:** Qntrl
+- **Organization URL:** https://www.qntrl.com/
+- **Organization logo:** https://www.qntrl.com/images/qntrl-logo.svg
+- **Header nav structure:** Ask user for the navigation path
+- **Direct competitors (check for similar pages):**
+  - Monday.com: https://monday.com/
+  - Kissflow: https://kissflow.com/
+  - Nintex: https://www.nintex.com/
+  - Pipefy: https://www.pipefy.com/
+  - Camunda: https://camunda.com/
+
+### Product 10: ManageEngine Insights
+- **Site root:** `https://insights.manageengine.com/`
+- **Ahrefs target:** `https://insights.manageengine.com/`
+- **Ahrefs mode:** `domain`
+- **GSC property:** `https://insights.manageengine.com/`
+- **Organization schema name:** ManageEngine
+- **Organization URL:** https://www.manageengine.com/
+- **Organization logo:** https://cdn.manageengine.com/images/logo/manageengine-logo.svg
+- **Header nav structure:** Ask user for the navigation path
+- **Direct competitors (check for similar pages):**
+  - Spiceworks Insights: https://community.spiceworks.com/
+  - TechTarget: https://www.techtarget.com/
+  - CIO.com: https://www.cio.com/
+  - ComputerWeekly: https://www.computerweekly.com/
+
+### Product 11: Zoho Flow
+- **Site root:** `https://www.zoho.com/flow/`
+- **Ahrefs target:** `https://www.zoho.com/flow/`
+- **Ahrefs mode:** `prefix`
+- **GSC property:** `https://www.zoho.com/flow/`
+- **Organization schema name:** Zoho Corporation
+- **Organization URL:** https://www.zoho.com/
+- **Organization logo:** https://www.zohowebstatic.com/sites/zweb/images/commonroot/zoho-logo-web.svg
+- **OG image base path:** https://www.zohowebstatic.com/sites/zweb/images/flow/
+- **OG site_name:** Zoho Flow
+- **Header nav structure:** Ask user for the navigation path
+- **Direct competitors (check for similar pages):**
+  - Zapier: https://zapier.com/
+  - Make (Integromat): https://www.make.com/
+  - Workato: https://www.workato.com/
+  - n8n: https://n8n.io/
+  - Boomi: https://boomi.com/
+
+### Product 12: Zoho QEngine
+- **Site root:** `https://www.zoho.com/qengine/`
+- **Ahrefs target:** `https://www.zoho.com/qengine/`
+- **Ahrefs mode:** `prefix`
+- **GSC property:** `https://www.zoho.com/qengine/`
+- **Organization schema name:** Zoho Corporation
+- **Organization URL:** https://www.zoho.com/
+- **Organization logo:** https://www.zohowebstatic.com/sites/zweb/images/commonroot/zoho-logo-web.svg
+- **OG image base path:** https://www.zohowebstatic.com/sites/zweb/images/qengine/
+- **OG site_name:** Zoho QEngine
+- **Header nav structure:** Ask user for the navigation path
+- **Direct competitors (check for similar pages):**
+  - Selenium: https://www.selenium.dev/
+  - TestComplete: https://smartbear.com/product/testcomplete/
+  - Katalon: https://katalon.com/
+  - Tricentis Tosca: https://www.tricentis.com/products/automate-continuous-testing-tosca
+  - Mabl: https://www.mabl.com/
+  - BrowserStack: https://www.browserstack.com/
+
+### Product 13: Unknown / Custom
 - Ask user for all organization details, logo URL, and nav structure.
 
 ---

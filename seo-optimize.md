@@ -106,7 +106,77 @@ Once the product is identified, load the corresponding configuration:
 - **Known restrictions:** Ask user before assuming any restrictions.
 - **Brand context:** Ask user for key differentiators and any content restrictions before proceeding.
 
-### Product 6: Unknown / Custom
+### Product 6: Zoho Tables
+- **GSC property:** `https://www.zoho.com/tables/`
+- **Ahrefs target:** `https://www.zoho.com/tables/`
+- **Ahrefs mode:** `prefix`
+- **URL path filter:** `tables`
+- **Category:** No-code Database / Collaborative Spreadsheet
+- **Primary competitors:** Airtable, Notion, Smartsheet, Monday.com, Coda, ClickUp, Rows
+- **Known restrictions:** Ask user before assuming any restrictions.
+- **Brand context:** Ask user for key differentiators and any content restrictions before proceeding.
+
+### Product 7: Zoho.com (main brand)
+- **GSC property:** `https://www.zoho.com/`
+- **Ahrefs target:** `https://www.zoho.com/`
+- **Ahrefs mode:** `domain`
+- **URL path filter:** `zoho.com`
+- **Category:** Business Software Suite
+- **Primary competitors:** Salesforce, HubSpot, Microsoft 365, Google Workspace, Freshworks
+- **Known restrictions:** Ask user before assuming any restrictions.
+- **Brand context:** Ask user for key differentiators and any content restrictions before proceeding.
+
+### Product 8: Zoho Creator
+- **GSC property:** `https://www.zoho.com/creator/`
+- **Ahrefs target:** `https://www.zoho.com/creator/`
+- **Ahrefs mode:** `prefix`
+- **URL path filter:** `creator`
+- **Category:** Low-code / No-code Application Builder
+- **Primary competitors:** OutSystems, Mendix, Microsoft Power Apps, Salesforce Platform, Bubble, Betty Blocks
+- **Known restrictions:** Ask user before assuming any restrictions.
+- **Brand context:** Ask user for key differentiators and any content restrictions before proceeding.
+
+### Product 9: Qntrl
+- **GSC property:** `https://www.qntrl.com/`
+- **Ahrefs target:** `https://www.qntrl.com/`
+- **Ahrefs mode:** `domain`
+- **URL path filter:** `qntrl.com`
+- **Category:** Workflow Orchestration / BPM
+- **Primary competitors:** Monday.com, Kissflow, Nintex, Pipefy, Appian, Camunda
+- **Known restrictions:** Ask user before assuming any restrictions.
+- **Brand context:** Ask user for key differentiators and any content restrictions before proceeding.
+
+### Product 10: ManageEngine Insights
+- **GSC property:** `https://insights.manageengine.com/`
+- **Ahrefs target:** `https://insights.manageengine.com/`
+- **Ahrefs mode:** `domain`
+- **URL path filter:** `insights.manageengine.com`
+- **Category:** IT Thought Leadership / Content Hub
+- **Primary competitors:** Spiceworks Insights, TechTarget, CIO.com, ComputerWeekly, BetaNews
+- **Known restrictions:** Ask user before assuming any restrictions.
+- **Brand context:** Ask user for key differentiators and any content restrictions before proceeding.
+
+### Product 11: Zoho Flow
+- **GSC property:** `https://www.zoho.com/flow/`
+- **Ahrefs target:** `https://www.zoho.com/flow/`
+- **Ahrefs mode:** `prefix`
+- **URL path filter:** `flow`
+- **Category:** Integration / Workflow Automation Platform
+- **Primary competitors:** Zapier, Make (Integromat), Workato, Tray.io, n8n, Boomi
+- **Known restrictions:** Ask user before assuming any restrictions.
+- **Brand context:** Ask user for key differentiators and any content restrictions before proceeding.
+
+### Product 12: Zoho QEngine
+- **GSC property:** `https://www.zoho.com/qengine/`
+- **Ahrefs target:** `https://www.zoho.com/qengine/`
+- **Ahrefs mode:** `prefix`
+- **URL path filter:** `qengine`
+- **Category:** Test Automation / QA Platform
+- **Primary competitors:** Selenium, TestComplete, Katalon, Tricentis Tosca, Mabl, BrowserStack, LambdaTest
+- **Known restrictions:** Ask user before assuming any restrictions.
+- **Brand context:** Ask user for key differentiators and any content restrictions before proceeding.
+
+### Product 13: Unknown / Custom
 If the user provides a product path not in the registry above:
 - Set GSC property and Ahrefs target to the provided URL
 - Ask the user: *"I don't have brand context for this product yet. Please provide: (1) product category, (2) top 3-5 competitors, (3) key differentiators, (4) any content restrictions I should know about."*
@@ -116,7 +186,7 @@ If the user provides a product path not in the registry above:
 
 ## BRAND CONTEXT CHECK
 
-For products 2-6 where brand context is marked "Ask user":
+For products 2-12 where brand context is marked "Ask user":
 Before starting the analysis, ask:
 
 > **Quick brand context check for [PRODUCT NAME]:**
