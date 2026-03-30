@@ -28,9 +28,9 @@ Sign in with your Anthropic account.
 
 ---
 
-### STEP 2 — Clone & Install Skills via Claude
+### STEP 2 — Clone & Install Skills via Claude code
 
-1. Open **Claude Desktop**
+1. Open **Claude Desktop** --> Navigate to Code 
 2. Type exactly this:
 
 "Clone this GitHub repo and install all skill files into
