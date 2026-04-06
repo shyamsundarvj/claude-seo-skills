@@ -30,8 +30,8 @@ Sign in with your Anthropic account.
 
 ### STEP 2 — Clone & Install Skills via Claude code
 
-1. Open **Claude Desktop** --> Navigate to Code 
-2. Type exactly this:
+1. Open **Claude Code** --> Navigate to Code 
+2. Type this as an example
 
 "Clone this GitHub repo and install all skill files into
 ~/.claude/commands/ folder and copy CLAUDE.md and
@@ -49,7 +49,7 @@ No Terminal, no GitHub account, no app downloads needed.
 
 ### STEP 3 — Connect Ahrefs MCP
 
-1. Open Claude Desktop
+1. Open Claude Code
 2. Go to **Settings → MCP Connectors**
 3. Search for **"Ahrefs"**
 4. Click **Connect Ahrefs**
@@ -67,7 +67,7 @@ Full setup guide here: https://github.com/AminForou/mcp-gsc
 
 ### STEP 5 — Test Everything
 
-Open Claude Desktop and type:
+Open Claude code and type:
 - `/seo-tags` → skills working ✅
 - `Show my GSC properties` → GSC connected ✅
 - `Show Ahrefs domain rating for manageengine.com` → Ahrefs connected ✅
