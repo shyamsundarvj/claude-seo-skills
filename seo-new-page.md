@@ -1,4 +1,5 @@
-# SEO New Page — Multi-Product Content Brief Generator for New Keywords
+# SEO New Page — Multi-Product Content Brief & Comparison Page Generator
+# Handles all new page creation: standard keyword pages AND comparison/alternatives/roundup pages
 # Confirms no existing page → Ahrefs keyword data → SERP analysis → Full content brief → Internal linking plan
 # Works with Google Search Console MCP and Ahrefs MCP integrations.
 
@@ -18,13 +19,36 @@ This fallback applies to: competitor page fetches, sitemap fetches, and any othe
 You are an expert SEO strategist with 15+ years of B2B experience. When invoked with a keyword that has no existing product page, generate a complete, production-ready content brief that a content writer or web team can execute directly.
 
 **Arguments** (from `$ARGUMENTS`):
-- First positional argument = target keyword (required).
+- First positional argument = target keyword (required for standard mode).
   Example: `/seo-new-page "agentic ai itsm" --product="SDP" --format=draft --instructions="Include virtual agent use cases"`
+  Example (comparison): `/seo-new-page --mode=comparison --page-type=vs --product="Zoho Flow" --competitor="Zapier"`
 - `--product="..."` — product path or name (optional — if omitted, ask the user)
 - `--instructions="..."` — custom brand/content/tone instructions (optional)
 - `--days=N` — GSC lookback window in days (default: 90)
 - `--top=N` — number of SERP results to analyze (default: 10)
 - `--format=brief|draft` — output format (default: brief). `brief` outputs a structured content brief. `draft` outputs a full content draft ready for review.
+- `--mode=standard|comparison` — page creation mode (default: standard). Use `comparison` for vs pages, alternatives, roundups, or feature matrices.
+- `--page-type=vs|alternatives|roundup|matrix` — type of comparison page to generate (used with `--mode=comparison`)
+- `--competitor="..."` — competitor name or URL (used with `--mode=comparison`)
+
+---
+
+## MODE SELECTION
+
+**Before executing**, determine which mode to run based on the arguments and user phrasing:
+
+### Mode 1: Standard New Page (default — `--mode=standard`)
+Triggered when: user provides a **target keyword** as the first argument with no `--mode=comparison` flag.
+Example: `/seo-new-page "ai itsm" --product="SDP"`
+→ Run Steps 0–10 below (full keyword research + SERP analysis + content brief pipeline).
+
+### Mode 2: Comparison Page Generation (`--mode=comparison`)
+Triggered when: user specifies `--mode=comparison`, OR uses phrases like "generate a vs page", "create an alternatives page", "build a comparison page", "write a best tools roundup", "write a competitor comparison".
+Example: `/seo-new-page --mode=comparison --page-type=vs --product="Zoho Flow" --competitor="Zapier"`
+→ **Always run STEP 0 first** (product resolution), then skip to the **COMPARISON PAGE GENERATION** section at the bottom of this file.
+
+**If mode is unclear**, ask:
+> Are you creating a **standard new page for a keyword** (informational, feature, solution), or a **comparison/alternatives page** where a competitor is the subject?
 
 ---
 
@@ -613,3 +637,184 @@ Instead of outputting just the brief (Sections 5-6), generate the **full content
 > - Add real screenshots, diagrams, or product images
 > - Have a subject matter expert review technical accuracy
 > - Test all internal links
+
+---
+
+## COMPARISON PAGE GENERATION MODE (`--mode=comparison`)
+
+> **Skip to here when** the user asks to generate a vs page, alternatives page, roundup, or comparison matrix. Run STEP 0 (product resolution) first, then follow this section exclusively — do NOT run Steps 1–10 above.
+
+### COMPETITOR MENTION GUIDELINES
+
+When writing about competitors, always follow these standards:
+- **Accuracy first:** Every feature claim must be verifiable from a public source (competitor website, documentation, or review platform). Never guess.
+- **No false claims:** Do not make misleading statements about competitor limitations. If uncertain, mark as "Not publicly confirmed."
+- **Pricing accuracy:** Always include "as of [date]" on any pricing data. Link to source.
+- **Balanced presentation:** Acknowledge competitor strengths honestly — one-sided analysis is less credible and less useful.
+- **Cite sources:** Link to competitor website, G2, Capterra, or official documentation for each claim.
+
+---
+
+### Step A — Identify Page Type and Inputs
+
+Ask the user if not provided via arguments:
+
+> **What type of comparison page are you building?**
+>
+> | # | Page Type | Example keyword targeted |
+> |---|-----------|--------------------------|
+> | 1 | X vs Y — head-to-head comparison | "[Our Product] vs [Competitor]" |
+> | 2 | Alternatives to X — listicle | "[Competitor] alternatives [year]" |
+> | 3 | Best [Category] Tools — roundup | "best [category] software [year]" |
+> | 4 | Feature matrix — multi-product comparison table | "[category] comparison chart" |
+>
+> Also confirm: **Which product is ours?** (from product registry) and **which competitor(s)** are we comparing against?
+
+---
+
+### Step B — Keyword Research for the Comparison Page
+
+```
+Tool: keywords-explorer-overview
+keywords: [our product] vs [competitor]
+country: us
+```
+```
+Tool: keywords-explorer-matching-terms
+keyword: [competitor] alternative
+country: us
+```
+
+Extract: search volume, KD, traffic potential, and related long-tail variants.
+
+**Keyword targeting by page type:**
+
+| Page Type | Primary keyword formula | Secondary keywords |
+|-----------|------------------------|--------------------|
+| X vs Y | `[A] vs [B] [year]` | `[A] vs [B] pricing`, `[A] vs [B] for [use case]` |
+| Alternatives | `[N] best [A] alternatives [year]` | `[A] alternative`, `[competitor] vs [A]` |
+| Best Tools | `best [category] tools [year]` | `top [category] software`, `[category] comparison` |
+| Matrix | `[category] comparison chart` | `[category] software comparison` |
+
+---
+
+### Step C — Fetch Competitor Pages
+
+For the competitor(s) being compared, WebFetch their main product page and any existing comparison pages:
+- Their homepage / product page
+- Any "[competitor] vs [our product]" page they already have
+- Their G2 / Capterra profile page
+
+Extract: features list, pricing, key differentiators, trust signals, CTAs.
+
+---
+
+### Step D — Generate the Comparison Page
+
+Output the full page in this structure:
+
+---
+
+#### Page: [PAGE TYPE] — [Our Product] vs [Competitor] / Alternatives to [Competitor]
+
+**Target keyword:** [primary keyword]
+**Secondary keywords:** [list]
+**Suggested URL slug:** `/[product-path]/[our-product]-vs-[competitor]/` or `/[product-path]/[competitor]-alternatives/`
+**Minimum word count:** 1,500 words
+
+---
+
+**Suggested title tag:**
+- vs page: `[A] vs [B]: [Key Differentiator] ([Year])`
+- alternatives page: `[N] Best [A] Alternatives in [Year] (Free & Paid)`
+- roundup: `[N] Best [Category] Tools in [Year], Compared & Ranked`
+
+**Suggested H1:** [Match title intent — under 70 characters — include primary keyword naturally]
+
+**Meta description:** [155 chars max — include primary keyword + clear value prop]
+
+---
+
+##### Page Structure
+
+**Above fold:**
+- Brief 2–3 sentence summary of the comparison with primary CTA ("Try [Our Product] free")
+- Quick verdict box (for vs pages): "Best for [use case] → [Product]"
+
+**Feature comparison table:**
+
+| Feature | [Our Product] | [Competitor A] | [Competitor B] |
+|---------|:-------------:|:--------------:|:--------------:|
+| [Feature 1] | Yes | Yes | No |
+| [Feature 2] | Yes | Partial | Yes |
+| [Feature 3] | Yes | No | No |
+| Free tier | Yes | No | Yes |
+| Pricing (from) | $X/mo | $Y/mo | $Z/mo |
+
+*All data verified from public sources. Pricing as of [date]. [Link to sources.]*
+
+**Section breakdown** (generate full content for each):
+1. Introduction — what this comparison covers and who it's for
+2. [Our Product] overview — features, strengths, ideal use case
+3. [Competitor] overview — features, strengths, ideal use case (balanced, accurate)
+4. Head-to-head: [Key differentiator 1]
+5. Head-to-head: [Key differentiator 2]
+6. Head-to-head: Pricing
+7. Who should choose [Our Product] — specific use cases and personas
+8. Who should choose [Competitor] — honest recommendation (builds trust)
+9. FAQ section (minimum 5 questions matching People Also Ask)
+10. Final verdict + CTA
+
+**CTA placement:**
+- Above fold: primary CTA — "Try [Our Product] free"
+- After comparison table: "See why teams switch from [Competitor] to [Our Product]"
+- Bottom of page: final CTA — "Start your free trial — no credit card required"
+- Do NOT place aggressive CTAs inside competitor description sections (reduces trust)
+
+**Social proof to include:**
+- G2 / Capterra rating with source link
+- Testimonial from a customer who switched from the competitor
+- Any relevant analyst recognition or award badge
+
+**Schema markup (copy-paste ready for dev team):**
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Best [Category] Tools [Year]",
+  "itemListOrder": "https://schema.org/ItemListOrderDescending",
+  "numberOfItems": "[Count]",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "[Product]", "url": "[URL]" }
+  ]
+}
+```
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "[Software Name]",
+  "applicationCategory": "[Category]",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "[Price]", "priceCurrency": "USD" }
+}
+```
+
+**Internal linking plan:**
+- Pages on our site that should link TO this comparison page (from sitemap analysis)
+- Pages this comparison page should link TO (feature pages, pricing page, free trial landing page)
+- Every link includes: anchor text (from real on-page content), link title attribute, placement
+
+**Claim verification checklist:**
+
+| Claim | Source | Verified? | Action |
+|-------|--------|-----------|--------|
+| [competitor feature claim] | [competitor docs / G2 / website] | Yes / No | [action] |
+| [pricing data] | [source URL] | Yes / No | Confirm date |
+
+---
+
+*Generated by /seo-new-page (comparison mode) — ManageEngine / Zoho SEO Team*
+*Product: [PRODUCT NAME] | Page type: [PAGE TYPE] | Competitor: [COMPETITOR] | Date: [today's date]*
