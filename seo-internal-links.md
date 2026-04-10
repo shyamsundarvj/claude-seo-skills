@@ -289,6 +289,7 @@ Output the full report in this structure:
 | **Impressions — last 90 days** | [X] |
 
 ### Existing internal links on this page
+
 | # | Anchor text | Links to | Still relevant? |
 |---|-------------|----------|-----------------|
 | 1 | [current anchor text] | [destination URL] | Yes / No / Could be improved |

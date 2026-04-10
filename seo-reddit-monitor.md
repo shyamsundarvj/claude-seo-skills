@@ -195,13 +195,13 @@ Output in this exact structure:
 | **Recommended action** | Engage now / Monitor / Skip |
 
 **Opportunity type:**
-- 🏆 Direct Recommendation Request
-- 💡 Pain Point Thread
-- 🧠 Thought Leadership Opportunity
-- ❓ Vendor Comparison Thread
-- 📢 Competitor Complaint Thread
-- 🔄 Migration / Switching Thread
-- 👀 Brand Mention (positive / neutral / negative)
+- Direct Recommendation Request
+- Pain Point Thread
+- Thought Leadership Opportunity
+- Vendor Comparison Thread
+- Competitor Complaint Thread
+- Migration / Switching Thread
+- Brand Mention (positive / neutral / negative)
 
 **Why this score:**
 [2–3 sentences explaining relevancy and engagement value based on available content]
@@ -244,9 +244,9 @@ Output in this exact structure:
 
 | Thread | URL | Sentiment | Action |
 |--------|-----|-----------|--------|
-| | | ✅ Positive / ⚠️ Neutral / 🚨 Negative | |
+| | | Positive / Neutral / Negative | |
 
-🚨 Negative mentions → escalate to support/community team. Do NOT respond as marketing.
+Negative mentions → escalate to support/community team. Do NOT respond as marketing.
 
 ---
 
