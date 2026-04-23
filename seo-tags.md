@@ -24,6 +24,8 @@ You are an expert SEO strategist with 15+ years of B2B experience. When given a 
 - Second positional argument = **target keyword** (required).
 - `--product="..."` — product path or name (optional — auto-detects from content if omitted; asks user if detection fails)
 - `--url="..."` — if the page already has a planned URL, use this instead of generating one
+- `--language="..."` — output language for all generated text: SEO titles, meta descriptions, breadcrumbs, image tags, schema, FAQ, internal link anchor text (default: `"en"`). Use standard ISO 639-1 codes: `"de"` for German, `"id"` for Indonesian, `"fr"` for French, `"es"` for Spanish, `"ja"` for Japanese, `"pt"` for Portuguese, `"nl"` for Dutch, `"it"` for Italian, `"ko"` for Korean, `"ar"` for Arabic, etc.
+- `--country="..."` — Ahrefs market for keyword volume, KD, SERP data (default: `"us"`). Use ISO 3166-1 alpha-2 codes: `"de"`, `"id"`, `"fr"`, `"es"`, `"jp"`, `"br"`, `"nl"`, `"it"`, `"kr"`, `"sa"`, etc. Can be set independently of `--language` (e.g. `--language="de" --country="ch"` for German content targeting Swiss search volume).
 
 **Reading .docx files:** If a `.docx` file path is provided as the first argument, use the `Read` tool to read the file directly from disk before proceeding. Extract all text content and treat it as the content document.
 
@@ -375,7 +377,7 @@ Pull keyword intelligence. Search intent MUST come from Ahrefs only.
 Tool: keywords-explorer-overview
 keywords: [TARGET KEYWORD]
 select: keyword,volume,difficulty,cpc,traffic_potential,serp_features,global_volume,intents,parent_topic,parent_volume
-country: us
+country: [--country value, default: us]
 ```
 
 ### 2B. Check for keyword cannibalization
@@ -384,7 +386,7 @@ Tool: site-explorer-organic-keywords
 target: [AHREFS TARGET]
 mode: [AHREFS MODE]
 keyword_filter: [TARGET KEYWORD]
-country: us
+country: [--country value, default: us]
 limit: 20
 ```
 
@@ -408,7 +410,7 @@ If existing pages already rank for this keyword, flag it as a cannibalization ri
 ```
 Tool: keywords-explorer-related-terms
 keyword: [TARGET KEYWORD]
-country: us
+country: [--country value, default: us]
 limit: 20
 ```
 
@@ -426,6 +428,8 @@ Extract 10-15 closely related keywords for the schema `keywords` array.
   - Feature pages → `/features/[slug].html`
   - Industry pages → `/industries/[slug].html`
   - Blog posts → `/blog/[slug].html`
+
+**Language prefix rule:** If `--language` is set to anything other than `"en"`, prepend `/{language-code}/` to the URL path. Example: `--language="de"` → `/de/products/service-desk/ki-itsm-software.html`. The URL slug itself should also use the translated keyword, not the English version.
 
 ### Breadcrumbs
 **IMPORTANT:** Breadcrumbs are based on the **header menu navigation path** from the homepage to the page, NOT from the sitemap structure.
@@ -452,7 +456,7 @@ Link title: ServiceDesk Plus > ITSM resources > ITSM best practices
 Tool: serp-overview
 select: url,title,position,traffic,domain_rating
 keyword: [TARGET KEYWORD]
-country: us
+country: [--country value, default: us]
 top_positions: 10
 ```
 
@@ -506,6 +510,8 @@ Identify pages topically relevant to the target keyword for internal linking sug
 ---
 
 ## STEP 6 — GENERATE THE COMPLETE SEO TAG SHEET
+
+**Language rule:** All generated text output — SEO titles, meta descriptions, breadcrumb labels, image alt text, image title attributes, image URL filenames (use translated slugs), FAQ questions and answers, internal link anchor text, and internal link placement notes — must be written in the language specified by `--language` (default: English). The structural labels of the report itself (section headers like "SEO Title", "Meta Description", etc.) remain in English for consistency. All content values within those sections must be in the target language.
 
 Output the full specification in this exact format:
 
@@ -653,6 +659,12 @@ Example label: `Image 14: App integrations` — where "App integrations" is the 
 <meta property="og:site_name" content="[PRODUCT NAME]"/>
 ```
 
+*(Add `og:locale` for non-English pages only — omit entirely when `--language="en"` or language not specified:)*
+```html
+<meta property="og:locale" content="[LANGUAGE]_[COUNTRY_UPPERCASE]"/>
+```
+Construct the value by combining the `--language` code and `--country` code in uppercase: e.g. `--language="de" --country="de"` → `de_DE`, `--language="id" --country="id"` → `id_ID`, `--language="fr" --country="fr"` → `fr_FR`, `--language="pt" --country="br"` → `pt_BR`.
+
 ### Twitter Card
 
 ```html
@@ -666,6 +678,40 @@ Example label: `Image 14: App integrations` — where "App integrations" is the 
 *(Add `twitter:image:alt` for Zoho products or educational content:)*
 ```html
 <meta name="twitter:image:alt" content="[Brief image description]"/>
+```
+
+---
+
+## Hreflang Tags
+
+**Only generate this section when `--language` is set to a non-English value.** Skip entirely for English pages.
+
+These tags tell search engines which language version to serve to which audience. Place them in the `<head>` of the page.
+
+```html
+<link rel="alternate" hreflang="en" href="[ENGLISH CANONICAL URL]"/>
+<link rel="alternate" hreflang="[LANGUAGE CODE]" href="[LOCALISED CANONICAL URL]"/>
+<link rel="alternate" hreflang="x-default" href="[ENGLISH CANONICAL URL]"/>
+```
+
+**Rules:**
+- `hreflang="en"` always points to the English version of the page (derive from the localised URL by removing the `/{language}/` prefix)
+- `hreflang="[LANGUAGE CODE]"` points to this localised page's canonical URL
+- `hreflang="x-default"` always points to the English version (same as `hreflang="en"`)
+- If the `--country` code differs from the `--language` code (e.g. `--language="de" --country="ch"`), use the region-specific tag: `hreflang="de-CH"` instead of `hreflang="de"`
+
+**Example for German (`--language="de" --country="de"`):**
+```html
+<link rel="alternate" hreflang="en" href="https://www.manageengine.com/products/service-desk/ai-itsm-software.html"/>
+<link rel="alternate" hreflang="de" href="https://www.manageengine.com/de/products/service-desk/ki-itsm-software.html"/>
+<link rel="alternate" hreflang="x-default" href="https://www.manageengine.com/products/service-desk/ai-itsm-software.html"/>
+```
+
+**Example for German targeting Switzerland (`--language="de" --country="ch"`):**
+```html
+<link rel="alternate" hreflang="en" href="https://www.manageengine.com/products/service-desk/ai-itsm-software.html"/>
+<link rel="alternate" hreflang="de-CH" href="https://www.manageengine.com/de/products/service-desk/ki-itsm-software.html"/>
+<link rel="alternate" hreflang="x-default" href="https://www.manageengine.com/products/service-desk/ai-itsm-software.html"/>
 ```
 
 ---
@@ -715,6 +761,7 @@ Generate the complete JSON-LD schema based on the **page type** determined in St
 
 **WebPage:**
 - Always include: url, name, description, inLanguage
+- `inLanguage` — set to the `--language` value (default: `"en"`). Examples: `"de"` for German, `"id"` for Indonesian, `"fr"` for French, `"ja"` for Japanese, `"pt"` for Portuguese, `"es"` for Spanish.
 - Include `isPartOf` referencing WebSite
 - Include `breadcrumb` referencing BreadcrumbList
 - Include `mainEntity` referencing TechArticle/Article if applicable
@@ -743,8 +790,9 @@ Example structure:
 - `author` — `@type: Person` with the author name from the content (if no author specified, use Organization)
 - `reviewedBy` — `@type: Person` with reviewer name (if specified in content)
 - `publisher` — reference Organization by @id
-- `keywords` — array of 10-15 related keywords (from target keyword + Ahrefs related terms)
-- `about` — array of Thing entities with `name` and `sameAs` (Wikipedia URLs) for key topics. Choose 5-10 core entities BUT only include terms that are directly relevant to the product and its features/capabilities. Do NOT include generic or tangential terms just because they appear in the content. Each entity must pass the test: "Is this a core concept the product actually addresses?" If not, omit it.
+- `inLanguage` — set to the `--language` value (default: `"en"`)
+- `keywords` — array of 10-15 related keywords (from target keyword + Ahrefs related terms). Keywords must be in the target `--language`, not English, when `--language` is non-English.
+- `about` — array of Thing entities with `name` and `sameAs` (Wikipedia URLs) for key topics. Choose 5-10 core entities BUT only include terms that are directly relevant to the product and its features/capabilities. Do NOT include generic or tangential terms just because they appear in the content. Each entity must pass the test: "Is this a core concept the product actually addresses?" If not, omit it. **`sameAs` Wikipedia links must point to the language-specific Wikipedia** — use `https://{language-code}.wikipedia.org/wiki/...` when `--language` is non-English (e.g. `https://de.wikipedia.org/wiki/...` for German, `https://id.wikipedia.org/wiki/...` for Indonesian). Fall back to `en.wikipedia.org` only if no article exists in the target language.
 - `mainEntityOfPage` — the canonical URL
 
 **FAQPage:**
