@@ -724,11 +724,22 @@ Generate the complete JSON-LD schema based on the **page type** determined in St
 
 | Page type | Schema types to include |
 |-----------|----------------------|
-| **TechArticle** (guide/explainer) | Organization, WebSite, WebPage, BreadcrumbList, TechArticle (with author, reviewedBy, keywords, about entities with sameAs Wikipedia links), FAQPage (if FAQ exists) |
-| **WebPage — Solution** | Organization (nested in about/author/publisher), WebSite (nested in isPartOf), WebPage (top-level with keywords, dates), BreadcrumbList (separate), FAQPage (if FAQ exists) |
-| **WebPage — Feature** | Organization, WebSite, WebPage, BreadcrumbList, FAQPage (if FAQ exists) |
-| **SoftwareApplication** (product/industry) | WebPage, BreadcrumbList, SoftwareApplication (with offers, aggregateRating ONLY if visible on page), FAQPage (if FAQ exists) |
-| **Article** (blog) | Organization, WebSite, WebPage, BreadcrumbList, Article (with author, keywords, about), FAQPage (if FAQ exists) |
+| **TechArticle** (guide/explainer) | Organization, WebSite, WebPage, BreadcrumbList, TechArticle (with author, reviewedBy, keywords, about entities with sameAs Wikipedia links), FAQPage (if FAQ exists), HowTo (if step-by-step instructions exist — see rule below) |
+| **WebPage — Solution** | Organization (nested in about/author/publisher), WebSite (nested in isPartOf), WebPage (top-level with keywords, dates), BreadcrumbList (separate), FAQPage (if FAQ exists), HowTo (if step-by-step instructions exist — see rule below) |
+| **WebPage — Feature** | Organization, WebSite, WebPage, BreadcrumbList, FAQPage (if FAQ exists), HowTo (if step-by-step instructions exist — see rule below) |
+| **SoftwareApplication** (product/industry) | WebPage, BreadcrumbList, SoftwareApplication (with offers, aggregateRating ONLY if visible on page), FAQPage (if FAQ exists), HowTo (if step-by-step instructions exist — see rule below) |
+| **Article** (blog) | Organization, WebSite, WebPage, BreadcrumbList, Article (with author, keywords, about), FAQPage (if FAQ exists), HowTo (if step-by-step instructions exist — see rule below) |
+
+### HowTo schema detection rule:
+
+**Trigger:** Include `HowTo` schema in the `@graph` whenever the content document contains a clearly structured sequence of steps — regardless of the primary page type. Signals to detect:
+- A section heading containing "how to" (e.g., "How to set up…", "How to configure…")
+- Numbered step blocks formatted as "Step 1:", "Step 2:", etc.
+- A numbered list under any H2/H3 where each item is an actionable instruction (not just a list of features or benefits)
+
+**If no step-by-step content is detected:** Omit HowTo entirely — do not fabricate steps from feature lists or benefit bullets.
+
+**If multiple "how-to" sequences exist** in the content (e.g., "How to install" and "How to configure" as separate sections), generate one `HowTo` block per sequence and include all in the `@graph`.
 
 ### Schema generation rules:
 
@@ -761,10 +772,11 @@ Generate the complete JSON-LD schema based on the **page type** determined in St
 
 **WebPage:**
 - Always include: url, name, description, inLanguage
+- `@id` — always set to `"[CANONICAL URL]#webpage"` so the TechArticle/Article node can reference it via `mainEntityOfPage`
 - `inLanguage` — set to the `--language` value (default: `"en"`). Examples: `"de"` for German, `"id"` for Indonesian, `"fr"` for French, `"ja"` for Japanese, `"pt"` for Portuguese, `"es"` for Spanish.
 - Include `isPartOf` referencing WebSite
 - Include `breadcrumb` referencing BreadcrumbList
-- Include `mainEntity` referencing TechArticle/Article if applicable
+- For article/guide pages, add `mainEntity` as an `@id` reference pointer to the article node: `"mainEntity": { "@id": "[CANONICAL URL]#article" }`. This is bidirectional linking — the WebPage points to the article, and the article points back to the WebPage via `mainEntityOfPage`. Do NOT inline the full TechArticle/Article object here — only use `{ "@id": "..." }` as a reference.
 - `datePublished` and `dateModified` — ONLY include if the dates are visually displayed on the page (e.g., "Published on March 19, 2026" or "Last updated: March 19, 2026"). If no dates are shown on the page, omit both fields from the schema entirely. Including them without displaying them can mislead search engines.
 
 **BreadcrumbList:**
@@ -785,6 +797,59 @@ Example structure:
 }
 ```
 
+**`mainEntityOfPage` vs `mainEntity` — Which to Use:**
+
+These two properties express opposite directions of the same relationship. Always apply the correct one based on the node type:
+
+| Property | Direction | Used on | When to use |
+|----------|-----------|---------|-------------|
+| `mainEntityOfPage` | Content → Page | TechArticle, Article, Product, Person, etc. | The content node declares which page it primarily lives on |
+| `mainEntity` | Page → Content | WebPage, WebSite | The page node declares what its primary subject is |
+
+**Rule for Article/TechArticle pages — use `mainEntityOfPage` with the bare canonical URL:**
+```json
+{
+  "@type": "TechArticle",
+  "@id": "https://www.example.com/page.html#article",
+  "mainEntityOfPage": "https://www.example.com/page.html"
+}
+```
+The `mainEntityOfPage` value is the bare canonical URL — no `#webpage` or `#article` fragment needed. The graph already disambiguates the relationship: the `WebPage` node has `@id: ...#webpage`, the article node has `@id: ...#article`, and `WebPage.mainEntity` points to `#article`. Adding a fragment to `mainEntityOfPage` would be redundant.
+
+**Fragment identifier rules:**
+
+| Node | `@id` fragment | Referenced by |
+|------|---------------|---------------|
+| `WebPage` | `#webpage` | `WebPage.mainEntity` points TO `#article`; `isPartOf` on the article node references `#website` |
+| `TechArticle` / `Article` | `#article` | `WebPage.mainEntity: { "@id": "...#article" }` |
+| `WebPage` (feature page) | `#webpage` | No article node exists; `#article` is not used at all |
+
+- **`mainEntityOfPage`** uses the bare canonical URL — not a `#webpage` reference.
+- **`#article`** is the `@id` of the TechArticle/Article node, referenced by `WebPage.mainEntity`.
+- **Feature pages** have no TechArticle/Article node, so `#article` and `mainEntityOfPage` do not apply.
+
+This is the Google-documented standard and is consistent with how major SEO validators expect article schema to be structured.
+
+**`mainEntity` on WebPage is correct when used as an `@id` reference pointer — not inline nesting.** The two patterns look similar but behave very differently:
+
+```json
+// CORRECT — @id reference pointer (bidirectional linking)
+{ "@type": "WebPage", "@id": "...#webpage",
+  "mainEntity": { "@id": "https://www.zoho.com/qengine/page.html#article" } }
+
+// WRONG — inlining the full object (creates circular/duplicate data)
+{ "@type": "WebPage",
+  "mainEntity": { "@type": "TechArticle", "headline": "...", ... } }
+```
+
+When both directions are expressed with `@id` pointers, the graph is correctly bidirectional with no duplication:
+- `WebPage.mainEntity` → `{ "@id": "...#article" }` (page points to article)
+- `TechArticle.mainEntityOfPage` → `{ "@id": "...#webpage" }` (article points back to page)
+
+**When `mainEntity` is used without a TechArticle/Article node:** Use it on a `WebPage` whose primary subject is a non-article entity — for example, a business (`mainEntity: Organization`) or a person. Same rule applies: always use `{ "@id": "..." }` reference, never inline the full object.
+
+---
+
 **TechArticle / Article:**
 - `headline` — use the H1 or a variation of the SEO title
 - `author` — `@type: Person` with the author name from the content (if no author specified, use Organization)
@@ -793,7 +858,7 @@ Example structure:
 - `inLanguage` — set to the `--language` value (default: `"en"`)
 - `keywords` — array of 10-15 related keywords (from target keyword + Ahrefs related terms). Keywords must be in the target `--language`, not English, when `--language` is non-English.
 - `about` — array of Thing entities with `name` and `sameAs` (Wikipedia URLs) for key topics. Choose 5-10 core entities BUT only include terms that are directly relevant to the product and its features/capabilities. Do NOT include generic or tangential terms just because they appear in the content. Each entity must pass the test: "Is this a core concept the product actually addresses?" If not, omit it. **`sameAs` Wikipedia links must point to the language-specific Wikipedia** — use `https://{language-code}.wikipedia.org/wiki/...` when `--language` is non-English (e.g. `https://de.wikipedia.org/wiki/...` for German, `https://id.wikipedia.org/wiki/...` for Indonesian). Fall back to `en.wikipedia.org` only if no article exists in the target language.
-- `mainEntityOfPage` — the canonical URL
+- `mainEntityOfPage` — the bare canonical URL as a string: `"[CANONICAL URL]"`. No fragment (`#webpage` or `#article`) needed — the graph structure already establishes the relationship via `@id` on each node and `WebPage.mainEntity`.
 
 **FAQPage:**
 - Only include if FAQ section exists in the content
@@ -820,6 +885,48 @@ Example structure:
   ```
   **In the output report, always mention the source platform name alongside the rating value** — e.g., "Rating: 4.4/5 (Source: Capterra, 46 reviews)" — so the marketing team knows where the data came from and can verify it.
 - `offers` — include free tier if applicable
+
+**HowTo:**
+- `name` — the exact heading text of the how-to section (e.g., "How to set up automated ticket routing in ServiceDesk Plus")
+- `step` — array of `HowToStep` objects, one per numbered step in the content
+- Each `HowToStep`:
+  - `"@type": "HowToStep"`
+  - `"position"` — the step number (integer)
+  - `"name"` — brief label for the step (derive from sub-heading or first phrase of the step if available; otherwise omit)
+  - `"text"` — the full instructional text of the step, extracted verbatim (or near-verbatim) from the content. Use plain text — no HTML tags inside `text`.
+- If a step contains a sub-heading/label and a description, use the sub-heading as `name` and the description as `text`.
+- Do NOT include steps that are not explicitly written in the content. Derive every step solely from the content document.
+- `image` — only include if the content document shows a screenshot or diagram alongside that specific step; otherwise omit.
+- `totalTime` — only include if the content explicitly states an estimated completion time (ISO 8601 duration format, e.g., `"PT10M"` for 10 minutes); otherwise omit.
+- `supply` and `tool` — only include if the content explicitly lists required materials or tools; otherwise omit.
+
+Example HowTo schema block:
+```json
+{
+  "@type": "HowTo",
+  "name": "How to configure AI-powered ticket categorization in ServiceDesk Plus",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Open the Admin console",
+      "text": "Log in to ServiceDesk Plus and navigate to Admin > Automation > AI Settings."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Enable AI categorization",
+      "text": "Toggle on 'AI-based ticket categorization' and select the categories you want the model to predict."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Set confidence threshold",
+      "text": "Set the minimum confidence score (recommended: 80%) below which tickets are routed to a human agent for manual categorization."
+    }
+  ]
+}
+```
 
 **IMPORTANT:** Output the complete JSON-LD as a ready-to-paste `<script>` block.
 
@@ -939,6 +1046,7 @@ Review the content document for common on-page SEO issues and flag them:
 - **aggregateRating in schema:** Only included if the rating is visually displayed on the page. If removed from the page design, remove from schema — including it without showing it can mislead Google.
 - **og:image / twitter:image:** Update the image URL once the final banner image filename is confirmed.
 - **FAQ schema:** Only included because FAQ section exists in the content. If FAQ is removed, remove the FAQPage schema block.
+- **HowTo schema:** Only included when the content contains explicit numbered step-by-step instructions. If the steps section is removed or restructured as non-sequential content, remove the HowTo schema block. Each `HowToStep.text` must stay in sync with the live page copy — update the schema whenever step text changes.
 
 ---
 
