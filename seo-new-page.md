@@ -370,6 +370,86 @@ dimension: page
 
 ---
 
+## AEO WRITING FRAMEWORKS
+
+These 4 frameworks apply to every section brief you write, and to every sentence you generate in `--format=draft` mode. They are derived from citation data showing how AI models (ChatGPT, Perplexity, Gemini, Google AIO) select and rank content snippets for inclusion in AI-generated answers. Apply all 4 — they compound.
+
+---
+
+### Framework 1 — BLUF: Bottom Line Up Front
+
+**What it is:** State the conclusion, recommendation, or key finding in the *first sentence* of the intro and the *first sentence* of every H2 section. Support follows.
+
+**Why it matters:** 44.2% of AI citations come from the first 30% of content. Transformer attention mechanisms weight early content more heavily than later content.
+
+**Mandatory rules:**
+- The page intro must open with a direct answer or key assertion — not background context, not "in today's world", not a question.
+- Every H2 section must open with the main point of that section — not a transition or setup sentence.
+- Titles must have strong semantic clarity: the keyword + the specific value proposition, not vague labels.
+- Test: read only the first sentence of each section. The full argument must be intelligible from those alone.
+
+**Example contrast:**
+- ❌ "There are many factors that influence how IT teams choose ITSM platforms, and one of the most important is AI capability..."
+- ✅ "AI-native ITSM platforms reduce ticket resolution time by 40%. ServiceDesk Plus delivers this through built-in agentic automation, virtual agents, and predictive analytics — without per-agent AI fees."
+
+---
+
+### Framework 2 — Declarative Statements: Write with Confidence
+
+**What it is:** Make definitive assertions using confident phrasing — "is defined as", "refers to", "means", "delivers", "enables", "requires". Reserve hedged language *only* for genuinely contested claims or emerging research.
+
+**Why it matters:** Cited content is nearly 2× more likely to contain definitive language (36.2% vs 20.2%). AI models favor confident-sounding sentences that directly answer queries in a single extractable unit.
+
+**Mandatory rules:**
+- Replace all hedging words in key claims: "might" → "does", "could potentially" → "will", "it seems like" → remove.
+- Use "is defined as" / "refers to" / "means" for all definitional sentences — these are high-citation triggers.
+- Every FAQ answer must open with a direct one-sentence answer before elaborating.
+- Only use qualified language for: emerging research stats, contested comparisons, forward-looking predictions.
+
+**Example contrast:**
+- ❌ "It seems like it might be a good idea to maybe consider an AI-powered help desk, since it could potentially reduce ticket resolution times..."
+- ✅ "An AI-powered help desk reduces ticket resolution time by automatically categorizing, routing, and resolving Tier 1 requests without human intervention."
+
+---
+
+### Framework 3 — Specificity: Maximize Entity Density
+
+**What it is:** Include named entities — specific product names, feature names, people, standards, metrics, and named concepts — at approximately 3–4× the rate of standard prose. Target ~20% entity density (vs. 5–8% in generic writing).
+
+**Why it matters:** Heavily AI-cited content has entity density of ~20.6%. LLMs process text through entity relationships — named entities anchor the model's relevance judgment and make snippets more extractable.
+
+**Mandatory rules:**
+- Name the specific tool, feature, or standard instead of using generic categories: not "automation tools" → "ServiceDesk Plus agentic workflows", not "compliance standards" → "ISO/IEC 20000, ITIL 4, GDPR".
+- Cite actual sources with names, not "according to research": not "studies show" → "Gartner (2024) reports", "HDI's 2023 Technical Support Practices survey found".
+- Specify exact metrics instead of vague references: not "significant improvement" → "40% reduction in mean time to resolve (MTTR)".
+- For every stat cited in the brief, include: the number, the metric name, the source organization, and the year.
+
+**Example contrast:**
+- ❌ "There are many things you can configure to improve your service desk's efficiency"
+- ✅ "Configuring ServiceDesk Plus's AI-powered auto-classification, SLA escalation rules, and the Zia virtual agent reduces mean time to resolve (MTTR) and eliminates manual ticket routing for Tier 1 incidents."
+
+---
+
+### Framework 4 — Strategic Repetition: Reinforce Key Points
+
+**What it is:** Place the page's core thesis and 2–3 key supporting points at multiple locations across the page — introduction, body, FAQ, and conclusion — rephrased each time to match different query formulations.
+
+**Why it matters:** AI models don't read entire pages — they retrieve snippets matching specific sub-queries. Repetition increases the probability that the core insight appears in whatever sample the model extracts. It also reinforces topical authority signals across the full document.
+
+**Mandatory rules:**
+- Identify the **core page thesis** (1 sentence) and the **2–3 key supporting claims** before writing any section.
+- The thesis must appear in: intro (stated directly), at least one mid-page section (contextually embedded), and conclusion/FAQ (summary framing).
+- Each repetition must be **rephrased** — not copy-pasted — to match a different likely query formulation.
+- Supporting claims should recur at least twice each, in different sections.
+
+**Example application (for a page on "AI ITSM"):**
+- Intro: "ServiceDesk Plus is an AI-native ITSM platform with no per-agent AI fees."
+- Mid-page (use cases section): "Because ServiceDesk Plus includes AI at no extra cost, IT teams deploy agentic automation at scale without budget constraints."
+- FAQ answer: "Unlike platforms that charge per AI seat, ServiceDesk Plus bundles agentic AI, virtual agents, and predictive analytics into every plan."
+- Conclusion: "ServiceDesk Plus delivers enterprise-grade AI ITSM without the per-agent pricing model that limits adoption on other platforms."
+
+---
+
 ## STEP 5 — GENERATE THE NEW PAGE BRIEF
 
 Output the full report in this structure:
@@ -525,6 +605,7 @@ For each H2 section, provide:
 | **Key points from competitors** | [what the top 3 cover in their equivalent section] |
 | **What to add beyond competitors** | [unique angle, additional depth, gap to fill] |
 | **Stats to include** | [if applicable — flag for verification] |
+| **AEO framework application** | **BLUF:** Open this section with: [exact recommended first sentence stating the key point] / **Declarative:** Key claims to state definitively (no hedging): [list] / **Specificity:** Named entities to include: [specific product features, standards, metrics, sources] / **Repetition:** If this is a mid-page or closing section, reinforce the thesis here using this phrasing: [rephrased version of core thesis or supporting claim] |
 
 *(Repeat for every H2 section)*
 
@@ -593,6 +674,16 @@ Before the page goes live, confirm:
 - [ ] Page speed acceptable (Core Web Vitals)
 - [ ] No product-specific content restrictions violated
 
+**AEO quality checks:**
+- [ ] **BLUF:** Page intro opens with a direct assertion (core thesis stated in sentence 1 — not background, not a question)
+- [ ] **BLUF:** Every H2 section opens with the main point of that section in sentence 1
+- [ ] **Declarative:** No unqualified hedging language ("might", "could potentially", "seems like") in any key claim
+- [ ] **Declarative:** All definitions use "is defined as" / "refers to" / "means" framing
+- [ ] **Specificity:** All stats include: number + metric name + source organization + year
+- [ ] **Specificity:** No generic "tools", "solutions", or "research shows" — all replaced with named entities
+- [ ] **Repetition:** Core thesis appears in intro, at least one mid-page section, and conclusion/FAQ — rephrased each time
+- [ ] **Repetition:** Each key supporting claim appears in at least 2 different sections with different phrasing
+
 ---
 
 *Generated by /seo-new-page — ManageEngine / Zoho SEO Team*
@@ -629,6 +720,40 @@ Instead of outputting just the brief (Sections 5-6), generate the **full content
 - Include schema markup suggestions as JSON-LD code blocks
 - Flag any claims that need verification with `[VERIFY: claim — source]`
 - Target the word count specified in the brief
+
+**Mandatory AEO writing rules for the full draft:**
+
+Before writing, identify and note at the top of your draft:
+1. **Core thesis** (1 sentence): the single most important claim this page makes
+2. **Supporting claims** (2–3 bullets): the key facts that prove the thesis
+
+Then apply all 4 frameworks throughout:
+
+**BLUF — every section opens with its point:**
+- Page intro: first sentence = direct answer or core thesis, not scene-setting
+- Every H2 section: first sentence = the key point of that section
+- Every FAQ answer: first sentence = the direct answer, then elaborate in 2–3 supporting sentences
+- Never open a section with a rhetorical question, a statistic preamble, or "In today's landscape..."
+
+**Declarative statements — write with authority:**
+- All definitions use: "X is defined as...", "X refers to...", "X means..."
+- All capability claims use: "X does Y", "X enables Y", "X reduces Y by Z%"
+- Remove all hedging before publishing: scan for "might", "could potentially", "seems to", "it's possible that", "some believe", and replace with direct statements
+- Only use qualified language for: forward-looking predictions, genuinely contested claims, preliminary research — mark those with `[VERIFY: hedged — confirm with source]`
+
+**Specificity — maximize entity density (~20%):**
+- Never write "automation tools" — name the specific feature: "ServiceDesk Plus agentic workflows"
+- Never write "studies show" or "research indicates" — name the source: "Gartner (2025) reports", "HDI's 2024 survey found"
+- Never write "significant reduction" — specify: "40% reduction in MTTR", "60% fewer Tier 1 escalations"
+- Every stat must include: the number + the metric name + the source organization + the year
+- Minimum entity check: every 100-word block should contain at least 4–5 named entities (products, standards, organizations, named concepts, specific metrics)
+
+**Strategic repetition — reinforce the thesis across the full page:**
+- State the core thesis in the **intro** (directly)
+- Restate it in at least one **mid-page section** (embedded contextually, rephrased)
+- Restate it in the **conclusion or final FAQ answer** (summary framing, rephrased again)
+- Each restatement must use different wording to match a different likely query formulation
+- Do the same for each supporting claim: appear at least twice, in different sections, rephrased
 
 **Important:** The draft is a starting point for human review, not a final version. Flag this clearly:
 > **Note:** This is an AI-generated first draft. Before publishing:

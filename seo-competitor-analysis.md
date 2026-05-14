@@ -351,6 +351,13 @@ For each page, extract and document:
 - What pain points does it address?
 - **[PRODUCT NAME] mentioned?** If yes: what's said, how positioned. If no: visibility gap.
 
+**F. AEO Compliance signals:**
+- **BLUF:** Does the intro (first 1–2 sentences) open with a direct assertion or core thesis — or with background, a question, or scene-setting? Do H2 sections open with their main point in sentence 1?
+- **Declarative:** Are key claims and definitions stated with confidence ("is defined as", direct assertions) or with hedging ("might", "could potentially", "seems to")?
+- **Specificity:** Are named entities (specific tools, standards, sources with year, exact metrics) cited throughout — or does the page use generic language ("automation tools", "studies show", "significant improvement")?
+- **Repetition:** Is there a core thesis visible in the intro, a mid-page section, and the conclusion/FAQ — rephrased each time?
+- **AEO verdict:** Strong / Moderate / Weak — [one sentence on what this page gets right or wrong for AI citation potential]
+
 ---
 
 ## STEP 5 — GENERATE THE COMPETITOR ANALYSIS REPORT
@@ -501,6 +508,9 @@ H1: [text]
 | Stats cited | | | | | |
 | Schema markup | | | | | |
 | Images/videos | | | | | |
+| **AEO compliance** | [Strong/Moderate/Weak] | | | | [Strong/Moderate/Weak] |
+
+*AEO compliance = BLUF + Declarative + Specificity + Repetition verdict from Section F in the per-page analysis above. Strong = all 4 frameworks applied. Moderate = 2–3 applied. Weak = 0–1 applied.*
 
 ### B. Topic coverage matrix
 

@@ -338,6 +338,17 @@ Record which scenario applies and which specific page(s) are involved.
 
 ---
 
+## AEO WRITING FRAMEWORKS (reference — applies to Scenario A brief + AEO Content Audit section)
+
+Four frameworks derived from AI citation data. When an existing page is found (Scenarios B–F), use these as a **diagnostic lens** to audit the page. When no page exists (Scenario A), use them as **prescriptive writing guidance** for the new page brief.
+
+- **BLUF:** 44.2% of AI citations come from the first 30% of content. Every intro and every H2 section should open with the main point in sentence 1 — not scene-setting or background.
+- **Declarative:** Cited content is 2× more likely to use definitive language. Replace "might", "could potentially", "seems to" with direct assertions. All definitions use "is defined as" / "refers to" / "means".
+- **Specificity:** Target ~20% entity density. Name specific tools, standards, sources, and metrics — never write "automation tools" or "studies show" when you can name the actual product feature or research source.
+- **Strategic Repetition:** AI models retrieve snippets, not full pages. The core page thesis should appear — rephrased — in the intro, at least one mid-page section, and the conclusion/FAQ.
+
+---
+
 ## STEP 4 — COMPETITOR & SERP ANALYSIS
 
 ### 4A. Get the SERP ranking data from Ahrefs
@@ -359,6 +370,16 @@ WebSearch: [TARGET KEYWORD]
 ```
 
 Use WebSearch only to cross-check or supplement Ahrefs data, NOT as the primary SERP source. If Ahrefs SERP overview is unavailable (API error), fall back to WebSearch and clearly note in the report: "SERP data from WebSearch fallback — positions are approximate."
+
+### 4A.5 — Fetch the product's own ranking page and extract AEO signals
+*(Only run this if Step 1 found an existing ranking page. Skip for Scenario A.)*
+
+Fetch the product's current ranking page using the WebFetch fallback rule. While extracting content for gap analysis, simultaneously note these AEO baseline signals — they feed directly into the AEO Content Audit section of the output:
+
+- **BLUF:** Does the intro (first 1-2 sentences) state a direct assertion or the core thesis? List any H2 sections whose first sentence is not the main point of that section.
+- **Declarative:** Extract any sentences with hedging language in key claims: "might", "could potentially", "it seems", "is generally considered", "some believe", "may help". Also flag definitions that don't use "is defined as" / "refers to" / "means".
+- **Specificity:** Note generic references where named entities should appear: "automation tools" → should name specific feature; "studies show" → should name source + year; "significant reduction" → should state exact metric.
+- **Repetition:** Identify the core thesis of the page (1 sentence). Check whether it appears — rephrased — in the intro, a mid-page section, and the conclusion or FAQ.
 
 ### 4B. Fetch and analyze the top 10 SERP results
 For EVERY result in the top 10, use WebFetch to retrieve the page. Analyze each one with the SAME framework:
@@ -493,6 +514,57 @@ Analyze every page in the top 10 with the same framework.
 | Feature gap | | |
 | Trust gap | | |
 | Visibility gap | | |
+
+---
+
+## 4.5 AEO Content Audit
+
+*(Skip this section for Scenario A — no existing page to audit. For all other scenarios, complete this audit using signals extracted in Step 4A.5.)*
+
+**Why this matters:** 88% of AI-cited URLs first rank in organic search. Once ranking, writing quality determines whether ChatGPT, Perplexity, Google AI Overviews, or AI Mode actually cites the page.
+
+#### Framework 1 — BLUF
+
+| Location | Issue | Current opening (quote) | Recommended rewrite |
+|----------|-------|------------------------|---------------------|
+| Page intro | [BLUF present / Missing] | "[first 1–2 sentences]" | [Rewrite leading with core thesis] |
+| H2: [section] | [BLUF present / Missing] | "[current first sentence]" | [Rewrite stating main point first] |
+| *(repeat for any failing H2 sections)* | | | |
+
+#### Framework 2 — Declarative Statements
+
+| Hedging found | Location | Current sentence (quote) | Recommended rewrite |
+|---------------|----------|--------------------------|---------------------|
+| [hedging word] | [H2 section, paragraph] | "[exact sentence]" | "[Rewritten as direct assertion]" |
+| *(repeat for each instance)* | | | |
+
+*If none found: "No hedging language detected in key claims."*
+
+#### Framework 3 — Specificity
+
+| Generic reference | Location | Recommended specific replacement |
+|-------------------|----------|----------------------------------|
+| "[e.g., 'automation tools']" | [H2, paragraph] | "[named feature / source + year / exact metric]" |
+| *(repeat for each instance)* | | |
+
+*If none found: "Entity density appears sufficient."*
+
+#### Framework 4 — Strategic Repetition
+
+**Core thesis identified:** [1 sentence — the main claim this page makes]
+
+| Location | Present? | Phrasing (if present) | Suggested addition/rewrite |
+|----------|----------|-----------------------|---------------------------|
+| Intro | Yes / No | "[quote]" | [Suggested phrasing if absent] |
+| Mid-page (H2: [section]) | Yes / No | "[quote]" | [Contextual embedding suggestion] |
+| Conclusion / FAQ | Yes / No | "[quote]" | [Summary framing suggestion] |
+
+#### AEO Priority Actions
+
+| Priority | Framework | Specific fix | Impact |
+|----------|-----------|-------------|--------|
+| High | [BLUF / Declarative / Specificity / Repetition] | [Exact action — e.g., "Rewrite intro to open with: '[suggested sentence]'"] | [Citation lift] |
+| Medium | | | |
 
 ---
 

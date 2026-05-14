@@ -454,6 +454,23 @@ List 3–5 long-tail variants from the related terms pulled in Step 1 where KD �
 
 ---
 
+## AEO WRITING FRAMEWORKS (apply to all content brief sections and draft output)
+
+Before writing the content brief, identify and note:
+1. **Core thesis** (1 sentence): the single most important claim this page makes
+2. **Supporting claims** (2–3 bullets): key facts that prove the thesis
+
+These feed into the per-section AEO guidance and are mandatory for `--format=draft` output.
+
+| Framework | Rule |
+|-----------|------|
+| **BLUF** | Page intro = direct thesis in sentence 1. Every H2 = main point of that section in sentence 1. Never open with scene-setting, a question, or "In today's landscape…" |
+| **Declarative** | All definitions use "is defined as" / "refers to" / "means". No hedging ("might", "could potentially", "seems to") in key claims. Reserve qualifiers only for genuinely contested claims. |
+| **Specificity** | ~20% entity density target. Name the specific product feature, tool, standard, and source — never write "automation tools", "studies show", or "significant improvement". Every stat = number + metric name + source organization + year. |
+| **Repetition** | Core thesis appears in intro (stated), at least one mid-page H2 (embedded, rephrased), and conclusion/FAQ (summary framing, rephrased again). Each supporting claim appears in at least 2 sections with different phrasing. |
+
+---
+
 ## STEP 9 — FULL CONTENT BRIEF
 
 This is the deliverable for the content marketer. It must be complete enough to execute without needing to reference any other document.
@@ -499,6 +516,11 @@ H2: [exact text]
     - [specific point 3]
   Stat/data to include: [specific stat or source recommendation — e.g., "cite Gartner 2024 RPA market size"]
   Product tie-in: [specific feature or capability to reference — by name]
+  AEO application:
+    BLUF: [exact recommended first sentence for this section — states the main point directly]
+    Declarative: [list any claims in this section to state definitively — no hedging]
+    Specificity: [named entities to include: specific features, standards, sources with year]
+    Repetition: [if intro/mid-page/conclusion — note how to reinforce the core thesis here with different phrasing]
 
   H3: [exact text] (if applicable)
     Purpose: [why this sub-section]
@@ -637,3 +659,9 @@ Deliver the full output in this order:
 - Run Step 4 competitor page fetches in parallel (up to 5 at a time).
 - Steps 6, 7, 8, 9 are sequential — each builds on the previous.
 - If `--format=draft` is passed, after delivering the full brief (Step 9), generate a full content draft with written paragraphs under each heading. Mark draft text clearly with `[DRAFT]` prefix per section. The draft should follow the brief exactly — same heading text, same structure, same product tie-ins.
+
+**Mandatory AEO writing rules for `--format=draft`:**
+- **BLUF:** First sentence of the page intro = core thesis stated directly. First sentence of every H2 = the main point of that section. Never open with context, a question, or a transition.
+- **Declarative:** Replace all hedging in key claims. All definitions use "is defined as" / "refers to" / "means". Scan before finalizing and remove "might", "could potentially", "it seems", "is generally considered".
+- **Specificity:** Every stat must include number + metric name + source organization + year. Name specific product features, not generic "our tool". Name specific standards and tools, not "industry solutions". Every 100-word block should contain at least 4–5 named entities.
+- **Repetition:** State the core thesis in the intro, restate it (rephrased) in at least one mid-page H2 section, and restate it again (rephrased) in the conclusion or a FAQ answer. Each rephrasing should match a different query formulation a user might type.

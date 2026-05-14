@@ -365,6 +365,11 @@ Read the entire content document and identify:
 7. **Key topics and entities** — main subjects covered (for `about` schema and `keywords`)
 8. **Third-party ratings visible** — only include in schema if ratings/reviews are displayed on the page
 9. **Content overview** — 1-2 sentence summary of the entire page for meta description (no social proof, no awards, no testimonials in description). **Use only exact terms and phrases from the content** — never paraphrase or substitute with synonyms (e.g., if the content says "staff", do not write "crew" or "team members").
+10. **AEO baseline signals** — scan the full content document and note the following for use in the AEO Content Audit (SEO Recommendations section):
+    - **BLUF:** Does the intro (first 1-2 sentences) open with a direct assertion or the core thesis — or does it open with scene-setting, a question, or background context? List any H2 sections whose first sentence is not the main point of that section.
+    - **Declarative:** Extract any sentences using hedging language in key claims or definitions: "might", "could potentially", "it seems", "is generally considered", "some believe", "may help", "could be". Also note any definitions that use vague framing instead of "is defined as" / "refers to" / "means".
+    - **Specificity:** Note any generic references where named entities should appear: "automation tools" instead of a product name, "studies show" instead of a named source, "significant reduction" instead of an exact metric, "one tool" instead of a specific named feature.
+    - **Repetition:** Identify the core thesis of the page (1 sentence). Check whether it appears — rephrased — in the intro, at least one mid-page section, and the conclusion or FAQ. Note where it is absent.
 
 ---
 
@@ -857,7 +862,46 @@ When both directions are expressed with `@id` pointers, the graph is correctly b
 - `publisher` — reference Organization by @id
 - `inLanguage` — set to the `--language` value (default: `"en"`)
 - `keywords` — array of 10-15 related keywords (from target keyword + Ahrefs related terms). Keywords must be in the target `--language`, not English, when `--language` is non-English.
-- `about` — array of Thing entities with `name` and `sameAs` (Wikipedia URLs) for key topics. Choose 5-10 core entities BUT only include terms that are directly relevant to the product and its features/capabilities. Do NOT include generic or tangential terms just because they appear in the content. Each entity must pass the test: "Is this a core concept the product actually addresses?" If not, omit it. **`sameAs` Wikipedia links must point to the language-specific Wikipedia** — use `https://{language-code}.wikipedia.org/wiki/...` when `--language` is non-English (e.g. `https://de.wikipedia.org/wiki/...` for German, `https://id.wikipedia.org/wiki/...` for Indonesian). Fall back to `en.wikipedia.org` only if no article exists in the target language.
+- `about` — array of Thing entities with `name` and `sameAs` (Wikipedia URLs) for key topics. Choose 5-10 core entities BUT only include terms that are directly relevant to the product and its features/capabilities. Do NOT include generic or tangential terms just because they appear in the content. Each entity must pass the test: "Is this a core concept the product actually addresses?" If not, omit it.
+
+  ### MANDATORY: Entity `sameAs` Verification (must run before schema is generated)
+
+  Before writing any entity into the schema, run this verification workflow for every candidate entity:
+
+  **Step 1 — Identify candidates**
+  List all candidate entities from the content. Do not assign any URLs yet.
+
+  **Step 2 — Construct candidate URLs**
+  For each entity, construct the Wikipedia URL using the exact article title format:
+  `https://en.wikipedia.org/wiki/[Article_Title]`
+  Use underscores for spaces (e.g. `IT_service_management`, not `IT service management`).
+  Do NOT use Wikidata Q-numbers at this stage — Q-numbers recalled from memory are unreliable.
+
+  **Step 3 — Fetch and verify each URL**
+  WebFetch every candidate URL. For each:
+  - Confirm the page loads (not a redirect to a disambiguation page or 404)
+  - Confirm the page title and opening paragraph describe the same concept as the entity name
+  - If the page is a disambiguation page, follow the correct link and verify that destination instead
+  - If the page redirects, confirm the redirect target is the correct article
+
+  **Step 4 — Build the verification log**
+  Output a verification table before the schema block:
+
+  | Entity | Candidate URL | Fetch result | Match? | Final `sameAs` |
+  |--------|--------------|--------------|--------|----------------|
+  | IT service management | https://en.wikipedia.org/wiki/IT_service_management | 200 OK | Yes | https://en.wikipedia.org/wiki/IT_service_management |
+  | Workflow | https://en.wikipedia.org/wiki/Workflow | 200 OK — but page describes generic workflow, not IT workflow | Partial — use as-is or omit | omit |
+  | ITIL | https://en.wikipedia.org/wiki/ITIL | 200 OK | Yes | https://en.wikipedia.org/wiki/ITIL |
+  | Change management | https://en.wikipedia.org/wiki/Change_management | 200 OK — disambiguation page with two meanings (IT vs org change) | No match — must resolve | https://en.wikipedia.org/wiki/Change_management_(ITSM) |
+
+  **Step 5 — Apply the results**
+  Only entities marked "Yes" in the Match column are included in the schema with their verified `sameAs` URL. Entities marked "No match" or "omit" are included as `{ "@type": "Thing", "name": "..." }` without a `sameAs` property.
+
+  **Enforcement rules:**
+  - **Never skip Step 3.** Constructing a URL without fetching it is not verification.
+  - **Never reuse Wikidata Q-numbers from memory.** If Wikipedia has no article for a concept, only then try Wikidata — and fetch that URL too before using it.
+  - **Non-English pages:** Use `https://{language-code}.wikipedia.org/wiki/...` — verify the language-specific article exists. Fall back to `en.wikipedia.org` only if it doesn't, and verify the fallback.
+  - **An entity without `sameAs` is valid schema.** Omitting an unverified URL is always better than including a wrong one.
 - `mainEntityOfPage` — the bare canonical URL as a string: `"[CANONICAL URL]"`. No fragment (`#webpage` or `#article`) needed — the graph structure already establishes the relationship via `@id` on each node and `WebPage.mainEntity`.
 
 **FAQPage:**
@@ -1028,14 +1072,83 @@ Review the content document for common on-page SEO issues and flag them:
 
 **Only list issues actually found in the content document. If no issues, state "No on-page SEO issues detected."**
 
-### For AI/LLM Traffic Optimization
+### AEO Content Audit — AI/LLM Citation Readiness
 
-| # | Recommendation | Why |
-|---|---------------|-----|
-| 1 | [e.g., "Add a direct-answer paragraph in the first 100 words"] | [AI models cite pages that answer the query directly and early] |
-| 2 | [e.g., "Include specific, citable stats with sources"] | [Perplexity/ChatGPT prefer factual, sourced content] |
+Audit the content document against the 4 AEO writing frameworks using the signals extracted in Step 1, item 10. For each framework, flag specific issues found in the content with exact quotes and actionable fixes.
 
-**Content-type restrictions for AI/LLM recommendations:**
+**Why this matters:** 88% of AI-cited URLs first rank in organic search — but once ranking, writing quality determines whether ChatGPT, Perplexity, or Google AIO actually cites the page. These 4 frameworks are derived from citation data across millions of AI-generated answers.
+
+---
+
+#### Framework 1 — BLUF (Bottom Line Up Front)
+
+*44.2% of AI citations come from the first 30% of content. AI models weight early content in each section more heavily.*
+
+| Location | Issue found | Current opening (quote) | Recommended rewrite |
+|----------|-------------|------------------------|---------------------|
+| Page intro | [BLUF present / Missing — describe] | "[first 1-2 sentences of intro]" | [Rewrite that leads with the core thesis or direct answer] |
+| H2: [section name] | [BLUF present / Missing] | "[current first sentence]" | [Rewrite that states the section's main point first] |
+| *(repeat for each H2 section that fails the BLUF test)* | | | |
+
+**Summary:** [X out of Y sections open with a direct assertion. Priority fix: intro and [highest-traffic H2 sections].]
+
+---
+
+#### Framework 2 — Declarative Statements
+
+*Cited content is nearly 2× more likely to contain definitive language (36.2% vs 20.2%). AI models extract confident, standalone sentences.*
+
+| Issue type | Current sentence (quote) | Recommended rewrite |
+|------------|--------------------------|---------------------|
+| Hedging in key claim | "[exact sentence with hedging word]" | "[Rewrite removing hedge — direct assertion]" |
+| Weak definition | "[definition using vague framing]" | "[Rewrite: '[Term] is defined as...']" |
+| *(repeat for each hedging instance found)* | | |
+
+**If no hedging found:** "No hedging language detected in key claims. Declarative standard met."
+
+---
+
+#### Framework 3 — Specificity (Entity Density)
+
+*Heavily AI-cited content has entity density of ~20.6% vs 5–8% in standard writing. Named entities anchor AI relevance judgment.*
+
+| Generic reference found | Location in content | Recommended specific replacement |
+|------------------------|---------------------|----------------------------------|
+| "[e.g., 'automation tools']" | [H2 section name, paragraph #] | "[e.g., 'ServiceDesk Plus agentic workflows and AI-powered auto-classification']" |
+| "[e.g., 'studies show']" | [H2 section name] | "[e.g., 'Gartner (2025) reports' or 'HDI's 2024 Technical Support Practices survey found']" |
+| "[e.g., 'significant reduction in tickets']" | [H2 section name] | "[e.g., '40% reduction in Tier 1 ticket volume']" |
+| *(repeat for each generic reference found)* | | |
+
+**If no generic references found:** "Entity density appears sufficient — named features, tools, and sources are cited throughout."
+
+---
+
+#### Framework 4 — Strategic Repetition
+
+*AI models retrieve snippets matching sub-queries — they don't read the full page. Repetition increases the probability a key insight appears in whatever sample is extracted.*
+
+**Core thesis identified:** [1 sentence — the main claim this page makes]
+
+| Location | Thesis present? | Current phrasing (if present) | Missing / Needs rephrasing |
+|----------|----------------|-------------------------------|---------------------------|
+| Intro (first paragraph) | Yes / No | "[quote if present]" | [Suggested phrasing if absent] |
+| Mid-page (H2: [section name]) | Yes / No | "[quote if present]" | [Suggested contextual embedding] |
+| Conclusion / FAQ | Yes / No | "[quote if present]" | [Suggested summary framing] |
+
+**If thesis is well-distributed:** "Core thesis appears in intro, mid-page, and conclusion with appropriate variation."
+
+---
+
+**AEO Priority Actions:**
+
+| Priority | Framework | Action | Impact |
+|----------|-----------|--------|--------|
+| High | BLUF | [Most critical section to rewrite — e.g., "Rewrite page intro to open with core thesis"] | Increases chance of AI citation from first 30% of content |
+| High | Declarative | [Most critical hedging fix — e.g., "Replace 'might help reduce tickets' with 'reduces Tier 1 ticket volume by X%'"] | 2× citation likelihood for definitive claims |
+| Medium | Specificity | [Most critical entity gap — e.g., "Replace 'industry-standard processes' with 'ITIL 4, ISO/IEC 20000, and COBIT'"] | Higher entity density → stronger AI relevance signal |
+| Medium | Repetition | [Where to add thesis reinforcement — e.g., "Add thesis restatement in FAQ answer #2"] | Broader snippet coverage across sub-queries |
+
+**Content-type restrictions:**
 - "Key takeaways" or "Summary" sections — ONLY suggest for educational/informational content types (TechArticle, Article, guides, how-tos). Do NOT suggest for product feature pages, solution pages, webinar pages, SoftwareApplication pages, or any commercial/transactional page types.
 
 ---

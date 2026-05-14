@@ -231,11 +231,11 @@ Action: [1–2 sentence specific recommendation]
 
 **AI_OVERVIEW pages:**
 - Diagnosis: Position improved [X] places but clicks still fell [Y]% — Google AI Overviews are answering "[query type]" queries without requiring a click.
-- Action: Reframe from definitional to operational. Add templates, decision trees, workflow diagrams, SDP-specific implementation guides, or downloadable assets — content AI cannot replicate inline.
+- Action: Reframe from definitional to operational. Add templates, decision trees, workflow diagrams, SDP-specific implementation guides, or downloadable assets — content AI cannot replicate inline. Additionally, apply the **BLUF** and **Declarative** AEO frameworks: rewrite the intro and each H2 section opener to state the key point in sentence 1 (BLUF), and replace any hedging language with confident direct assertions (Declarative). These changes increase the probability the page gets cited in AI answers even when AI Overviews answer the query — appearing as a cited source is the new click pathway.
 
 **CONTENT_DECAY pages:**
 - Diagnosis: Position held at [X] but clicks fell [Y]% — competitors have published more comprehensive or fresher content on this topic.
-- Action: Conduct a SERP analysis on the top keyword. Identify the content gaps vs the top 3 ranking pages. Update stats, examples, and depth. Run `/seo-optimize [top keyword]` for a full brief.
+- Action: Conduct a SERP analysis on the top keyword. Identify the content gaps vs the top 3 ranking pages. Update stats, examples, and depth. Run `/seo-optimize [top keyword]` for a full brief. Also apply the **Specificity** and **Strategic Repetition** AEO frameworks: replace generic references ("studies show", "many organizations") with named sources and exact metrics (Specificity), and ensure the page's core thesis appears in the intro, a mid-page section, and the conclusion with different phrasing (Repetition) — both improve citation freshness signals that help pages hold rankings.
 
 **RANKING_LOSS pages:**
 - Diagnosis: Position dropped [X] places (from [P1] to [P2]) causing a [Y]% click decline. Competitors gained ground on this topic.

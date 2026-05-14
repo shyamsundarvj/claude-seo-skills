@@ -33,7 +33,21 @@ Ask for:
 
 If URL provided, use web_fetch to pull the content.
 
-## Step 2: Evaluate Across 8 Criteria
+## AEO WRITING FRAMEWORKS
+*(Reference for Criterion 9 evaluation)*
+
+Four evidence-backed writing patterns that double citation probability in AI-generated answers (source: Ahrefs AEO study):
+
+| Framework | Rule | Evidence |
+|-----------|------|----------|
+| **BLUF** | Page intro = direct thesis in sentence 1. Every H2 = main point in sentence 1. | 44.2% of AI citations come from first 30% of content |
+| **Declarative** | Use "is defined as", "enables", "reduces". No hedging: "might", "could potentially", "it seems". | Cited content is 2× more likely to use definitive language (36.2% vs 20.2%) |
+| **Specificity** | ~20% entity density target. Name specific tools, standards, sources with year, exact metrics. | Cited content averages ~20% entity density vs 5–8% in standard writing |
+| **Repetition** | Core thesis appears in intro (stated directly), mid-page H2 (embedded, rephrased), conclusion/FAQ (summary framing). | AI models extract page snippets — repetition ensures the thesis is present in any extracted chunk |
+
+---
+
+## Step 2: Evaluate Across 9 Criteria
 
 Score each 0-10.
 
@@ -222,6 +236,41 @@ Check for:
 
 ---
 
+### Criterion 9: AEO Writing Frameworks
+**Weight: High**
+
+Evaluate whether the page applies the four evidence-backed writing patterns that improve AI citation probability. These are diagnostic checks — quote specific lines from the page when flagging issues.
+
+**BLUF (Bottom Line Up Front)**
+- [ ] Page intro opens with a direct assertion or core thesis in sentence 1 — not with background, a question, or scene-setting
+- [ ] Each H2 section opens with its main point in sentence 1 — not with context, preamble, or a rhetorical question
+- [ ] Key definitions and conclusions appear early in each section, not after multiple setup sentences
+
+**Declarative Statements**
+- [ ] Key claims use confident verbs: "is defined as", "enables", "reduces", "requires", "eliminates"
+- [ ] No hedging language in primary value claims: "might", "could potentially", "may help", "it seems", "in some cases"
+- [ ] Recommendations are stated with confidence — "The best approach is X" not "You might want to consider X"
+
+**Specificity (Entity Density)**
+- [ ] Named tools, standards, frameworks, organizations, and sources appear throughout — not generic references like "studies show", "many organizations", "some tools"
+- [ ] Statistics include all four elements: number + metric name + source organization + year (e.g., "43% of ITSM teams — Forrester, 2024")
+- [ ] Entity density is ~20% of meaningful words (products, people, standards, certifications, named methodologies)
+
+**Strategic Repetition**
+- [ ] A core thesis is identifiable — one clear sentence that encapsulates the page's central claim
+- [ ] The thesis appears in the intro (stated directly), mid-page (embedded in a section, rephrased), and conclusion or FAQ (as a summary)
+- [ ] Each recurrence uses different phrasing to match different query formulations — not copied verbatim
+- [ ] Key claims are not stated once and abandoned — important points recur across multiple sections
+
+**Scoring:**
+- 9-10: All 4 frameworks clearly applied — BLUF intro, no hedging, ~20% entity density, thesis recurs with varied phrasing
+- 7-8: 3 frameworks applied well, one has a clear gap
+- 4-6: 1-2 frameworks applied, significant AEO weaknesses
+- 1-3: Minimal framework application — vague, hedged, low entity density
+- 0: Content is generic, hedged, repetition-free, and entity-sparse throughout
+
+---
+
 ## Step 3: Generate the Report
 
 ```
@@ -232,7 +281,7 @@ Target AI Query: [the query they want to appear for]
 Brand: [brand name]
 Date: [Current Date]
 
-OVERALL SCORE: [X]/80 ([percentage]%)
+OVERALL SCORE: [X]/90 ([percentage]%)
 
 CRITERION SCORES:
 1. Direct Answer Density:        [X]/10
@@ -243,6 +292,7 @@ CRITERION SCORES:
 6. E-E-A-T Signals:              [X]/10
 7. Question Coverage:            [X]/10
 8. Freshness & Relevance:        [X]/10
+9. AEO Writing Frameworks:       [X]/10
 
 READINESS LEVEL: [Invisible / Needs Work / AI-Friendly / AI-Optimized]
 ```
@@ -254,6 +304,53 @@ READINESS LEVEL: [Invisible / Needs Work / AI-Friendly / AI-Optimized]
 - **AI-Optimized** (76-100%): Well-positioned for AI citations and recommendations.
 
 ### After scores, provide:
+
+**AEO Framework Audit**
+
+*Evaluate each framework against the actual fetched content. Quote specific lines.*
+
+#### Framework 1 — BLUF (Bottom Line Up Front)
+| Location | Status | Current opening (quote from page) | Recommended rewrite |
+|----------|--------|-----------------------------------|---------------------|
+| Page intro | Pass / Fail | "[first sentence of intro]" | "[rewritten version that states the thesis directly]" |
+| H2: [section name] | Pass / Fail | "[first sentence of that H2 section]" | "[rewritten version]" |
+| *(repeat for each H2 that fails)* | | | |
+
+#### Framework 2 — Declarative Statements
+| Location | Hedging language found | Declarative replacement |
+|----------|----------------------|------------------------|
+| [section] | "[exact hedging phrase quoted from page]" | "[confident rewrite]" |
+| *(list all hedged claims found)* | | |
+
+*If no hedging language found: note "Pass — no hedging detected in primary claims."*
+
+#### Framework 3 — Specificity (Entity Density)
+| Location | Generic reference found | Named entity replacement |
+|----------|------------------------|-------------------------|
+| [section] | "[e.g., 'studies show', 'many companies']" | "[specific: 'Forrester, 2024 found that 63% of...']" |
+| *(list all generic references found)* | | |
+
+*Entity density estimate: [X]% (target: ~20%). Count named entities (brands, tools, standards, certifications, people, sources) per 100 meaningful words.*
+
+#### Framework 4 — Strategic Repetition
+**Core thesis identified:** [Extract the page's central claim in one sentence — or note "No clear thesis found"]
+
+| Location | Thesis present? | Phrasing used |
+|----------|----------------|---------------|
+| Intro | Yes / No | "[quote or 'not present']" |
+| Mid-page H2: [section name] | Yes / No | "[quote or 'not present']" |
+| Conclusion / FAQ | Yes / No | "[quote or 'not present']" |
+
+*If thesis appears in all 3 locations with varied phrasing: Pass. If missing from 1: Weak. If missing from 2+: Fail.*
+
+#### AEO Priority Actions
+| Priority | Framework | Specific fix | Example rewrite |
+|----------|-----------|-------------|-----------------|
+| 1 | [BLUF / Declarative / Specificity / Repetition] | [what to change] | [before → after using actual content] |
+| 2 | | | |
+| 3 | | | |
+
+---
 
 **Top 3 Quick Wins**
 - Specific, actionable fixes ranked by impact on AI citation likelihood.
