@@ -265,6 +265,14 @@ If the page cannot be fetched, note it clearly and proceed with what is availabl
 - **Declarative:** Extract any sentences with hedging language in key claims: "might", "could potentially", "it seems", "is generally considered", "some believe", "may help". Flag any definitions not using "is defined as" / "refers to" / "means".
 - **Specificity:** Note generic references where named entities should appear: "automation tools", "studies show", "significant improvement", "one tool". Also check whether stats include source + year.
 - **Repetition:** Identify the core thesis of the page. Check whether it appears: rephrased: in the intro, a mid-page section, and the conclusion or FAQ.
+- **E-E-A-T:** Check: (a) is an author name visible on the page? (b) is a published or last-updated date visible? (c) does the page use first-person experience language ("we tested", "in our implementation", "our team found")? (d) does the page cite at least one external named source (analyst firm, standards body, research study)?
+- **Freshness:** Check: (a) does any stat or data point include a source year? (b) does the page reference the current year or a recent event? (c) are there any references that appear dated (old pricing, deprecated product names, obsolete standards)?
+
+**RAG Chunk Signals**: while parsing the content map, score each H2/H3 section as a standalone retrievable unit. RAG-based AI systems (Perplexity, ChatGPT, Gemini) split pages into chunks before retrieval — each chunk must be self-sufficient to be cited. For each section note:
+- **Self-contained:** Can this section be read and understood without surrounding context? Flag any section that uses "as mentioned above", undefined acronyms, or pronouns with no antecedent within the section.
+- **Answer-first:** Does the first sentence of the section directly state its main point? Flag any section that opens with background, preamble, or a rhetorical question.
+- **Citation density:** Does the section include at least one named source, named standard, or stat with a year? Flag any section that makes a factual claim with no named backing.
+- **Extractable:** Could a 2–4 sentence excerpt from this section be used verbatim by an AI as a standalone answer? Flag any section where the core claim is buried mid-paragraph, split across paragraphs, or requires surrounding context to be meaningful.
 
 ---
 
@@ -538,8 +546,41 @@ By expanding content to address these uncovered or under-explored areas, the pag
 | **Declarative** | Pass / Fail | [e.g., "'Zia might help reduce ticket volume': hedging in key claim"] | [e.g., "Change to: 'Zia reduces Tier 1 ticket volume by X%'"] |
 | **Specificity** | Pass / Fail | [e.g., "'automation tools' in H2 Benefits: no named feature cited"] | [e.g., "Replace with: 'ServiceDesk Plus agentic workflows and AI-powered auto-classification'"] |
 | **Repetition** | Pass / Fail | [e.g., "Core thesis not present in conclusion or FAQ"] | [e.g., "Add thesis restatement to FAQ answer #3 with this phrasing: '[rephrased version]'"] |
+| **E-E-A-T** | Pass / Fail | [e.g., "No author name, no published date, no external source cited"] | [e.g., "Add author byline, add 'Last updated: [date]', cite one external source (e.g., Gartner, AXELOS) in the most factual section"] |
+| **Freshness** | Pass / Fail | [e.g., "Stats present but no source years; no current-year reference"] | [e.g., "Append '(Forrester, 2024)' to stat in H2 [section]; update dateModified in schema"] |
 
 *Pass = framework applied correctly. Fail = specific issue found that reduces AI citation probability.*
+
+---
+
+### RAG Chunk Audit
+
+*RAG-based AI systems (Perplexity, ChatGPT, Gemini) split pages into chunks — typically one per H2/H3 block — before retrieval. Each chunk is evaluated and cited independently. A section that requires context from another part of the page to make sense will be dropped or misrepresented by the retrieval system. This audit scores every content section as a standalone unit.*
+
+**Legend:** ✅ Pass · ⚠️ Partial · ❌ Fail
+
+| Section (H2/H3) | Self-contained | Answer-first | Citation density | Extractable | Chunk score |
+|---|---|---|---|---|---|
+| [H2: exact heading text] | ✅ / ⚠️ / ❌ | ✅ / ⚠️ / ❌ | ✅ / ⚠️ / ❌ | ✅ / ⚠️ / ❌ | [X/4] |
+| [H3: exact heading text] | ✅ / ⚠️ / ❌ | ✅ / ⚠️ / ❌ | ✅ / ⚠️ / ❌ | ✅ / ⚠️ / ❌ | [X/4] |
+| *(repeat for all H2/H3 sections on the page)* | | | | | |
+
+**Criteria definitions:**
+- **Self-contained:** The section can be read and understood without any other part of the page. No "as mentioned above", no undefined acronyms, no dangling pronouns.
+- **Answer-first:** The first sentence states the section's main point directly — not background, context, or a rhetorical question.
+- **Citation density:** At least one named source, named standard, or stat with a year appears in the section.
+- **Extractable:** A 2–4 sentence excerpt from this section could be used verbatim by an AI as a standalone answer. The core claim is not buried mid-paragraph or split across multiple paragraphs.
+
+**Chunk Priority Fix List**
+
+Sections scoring 2/4 or below, ordered by page prominence (higher on page = higher priority):
+
+| Section | Failing criteria | Specific fix |
+|---|---|---|
+| [H2/H3: heading] | [e.g., Not self-contained + No citation density] | [Exact fix: e.g., "Open with: '[direct assertion that restates what this section covers]'. Add: 'According to [Source, year], [specific stat or claim].' Remove reference to 'as discussed in the previous section' — restate the context inline."] |
+| *(repeat for all sections scoring ≤ 2/4)* | | |
+
+**Overall chunk readiness: [X]/[total sections] sections are fully extractable (score 4/4)**
 
 ---
 
@@ -685,6 +726,56 @@ Schema additions that unlock AI traffic independently of content changes:
 | [Sub-query text] | ✅ Yes | 🔵 Product leads | 🤖 | Add FAQPage / HowTo schema to existing content: no rewrite needed | [Which section to wrap with schema] |
 
 **Impact key:** 🏆 Head keyword signal · ⚡ Fast-win cluster (top 3 in 2–6 months) · 🤖 AI citation target
+
+---
+
+### Citable Paragraph Templates
+
+*For the 5 highest-traffic-potential uncovered sub-queries (❌ Not covered or ⚠️ Partial, ranked by Traffic Potential from Step 5A), this section shows what the ideal extractable answer looks like after the fix — a 2–4 sentence chunk a RAG system can retrieve and cite verbatim.*
+
+*Each template applies all four AEO frameworks simultaneously: answer-first sentence (BLUF), no hedging (Declarative), named entities and sourced stats (Specificity), and a product tie-in that embeds the core page thesis (Repetition). The result is a self-contained chunk that scores 4/4 on the RAG Chunk Audit.*
+
+*Use these directly as briefs for your content writer — they show the exact output to produce, not just the topic to cover.*
+
+---
+
+**Template 1** · Sub-query: "[Q text]" · Traffic Potential: [X] · KD: [X]
+
+> [**Answer-first sentence**: direct assertion that fully answers the sub-query in one sentence — no preamble, no hedging.] [**Supporting sentence**: named entity + sourced stat — "According to [Source, year], [specific finding]." or "[Named standard/framework] defines this as [specific definition]."] [**Product tie-in sentence**: specific named feature of the product that is directly relevant — "ServiceDesk Plus's [named feature] [specific capability], enabling [specific outcome]." Never generic.] [**Optional thesis echo**: one closing sentence that restates the page's core claim in different phrasing — ensures the chunk contributes to Strategic Repetition.]
+
+*Why this chunk is citable:* [One sentence explaining what makes it extractable — e.g., "Self-contained, opens with a definition, cites AXELOS ITIL 4 (2023), names a specific ServiceDesk Plus feature, and can be read without surrounding context."]
+
+---
+
+**Template 2** · Sub-query: "[Q text]" · Traffic Potential: [X] · KD: [X]
+
+> [Same structure: answer-first · named entity + stat · product tie-in · optional thesis echo]
+
+*Why this chunk is citable:* [One sentence]
+
+---
+
+**Template 3** · Sub-query: "[Q text]" · Traffic Potential: [X] · KD: [X]
+
+> [Same structure]
+
+*Why this chunk is citable:* [One sentence]
+
+---
+
+**Template 4** · Sub-query: "[Q text]" · Traffic Potential: [X] · KD: [X]
+
+> [Same structure]
+
+*Why this chunk is citable:* [One sentence]
+
+---
+
+**Template 5** · Sub-query: "[Q text]" · Traffic Potential: [X] · KD: [X]
+
+> [Same structure]
+
+*Why this chunk is citable:* [One sentence]
 
 ---
 

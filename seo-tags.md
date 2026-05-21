@@ -72,7 +72,7 @@ Display this message and wait:
 - **GSC property:** `https://www.manageengine.com/products/service-desk/`
 - **Organization schema name:** ManageEngine
 - **Organization URL:** https://www.manageengine.com/
-- **Organization logo:** https://cdn.manageengine.com/images/logo/manageengine-logo.svg
+- **Organization logo:** https://www.manageengine.com/images/logo/manageengine-logo.svg
 - **Logo dimensions:** 700 x 130
 - **OG image base path:** https://www.manageengine.com/products/service-desk/
 - **Header nav structure:** ServiceDesk Plus > [varies by content type: Features / Solutions / Resources / ITSM best practices / AI / Integrations]
@@ -97,7 +97,7 @@ Display this message and wait:
 - **GSC property:** `https://www.manageengine.com/`
 - **Organization schema name:** ManageEngine
 - **Organization URL:** https://www.manageengine.com/
-- **Organization logo:** https://cdn.manageengine.com/images/logo/manageengine-logo.svg
+- **Organization logo:** https://www.manageengine.com/images/logo/manageengine-logo.svg
 - **Header nav structure:** Ask user for the navigation path
 - **Direct competitors (check for similar pages):**
   - SolarWinds: https://www.solarwinds.com/
@@ -116,7 +116,7 @@ Display this message and wait:
 - **GSC property:** `https://www.manageengine.com/academy/`
 - **Organization schema name:** ManageEngine
 - **Organization URL:** https://www.manageengine.com/
-- **Organization logo:** https://cdn.manageengine.com/images/logo/manageengine-logo.svg
+- **Organization logo:** https://www.manageengine.com/images/logo/manageengine-logo.svg
 - **Header nav structure:** Ask user for the navigation path
 - **Direct competitors (check for similar pages):**
   - Atlassian Resources: https://www.atlassian.com/enterprise/resources
@@ -260,7 +260,7 @@ Display this message and wait:
 - **GSC property:** `https://insights.manageengine.com/`
 - **Organization schema name:** ManageEngine
 - **Organization URL:** https://www.manageengine.com/
-- **Organization logo:** https://cdn.manageengine.com/images/logo/manageengine-logo.svg
+- **Organization logo:** https://www.manageengine.com/images/logo/manageengine-logo.svg
 - **Header nav structure:** Ask user for the navigation path
 - **Direct competitors (check for similar pages):**
   - IBM Think: https://www.ibm.com/think
@@ -317,7 +317,7 @@ Display this message and wait:
 - **GSC property:** `https://www.manageengine.com/products/service-desk-msp/`
 - **Organization schema name:** ManageEngine
 - **Organization URL:** https://www.manageengine.com/
-- **Organization logo:** https://cdn.manageengine.com/images/logo/manageengine-logo.svg
+- **Organization logo:** https://www.manageengine.com/images/logo/manageengine-logo.svg
 - **OG image base path:** https://www.manageengine.com/products/service-desk-msp/
 - **OG site_name:** ServiceDesk Plus MSP
 - **Header nav structure:** Ask user for the navigation path
@@ -567,6 +567,22 @@ Output the full specification in this exact format:
 Provide 3 variations. All must be 50-65 characters. Mark the recommended one.
 
 **Separator rule:** Use `-` (hyphen) as the separator between the primary phrase and secondary element if a separator is needed. Do NOT use `|` (pipe) in any SEO title.
+
+**Brand/product name in title — rule by page type:**
+
+| Page type | Brand/product name in SEO title? |
+|-----------|----------------------------------|
+| TechArticle (guide, explainer, how-to) | **No** — do not append the brand/product name to any variation |
+| Article (blog post, thought leadership) | **No** — do not append the brand/product name to any variation |
+| HowTo | **No** — do not append the brand/product name to any variation |
+| WebPage — Feature | **Yes** — end with `- [Product Name]` |
+| WebPage — Solution | **Yes** — end with `- [Product Name]` |
+| SoftwareApplication (industry/landing page) | **Yes** — end with `- [Product Name]` |
+| Core pages (home, pricing, demo, signup) | **Yes** — end with `- [Product Name]` |
+
+For educational content types (TechArticle, Article, HowTo), all 3 title variations must be written as standalone descriptive titles without a brand suffix. The title should earn clicks through topic clarity and relevance, not brand recognition.
+
+**Listicle content rule:** When the content is a listicle (contains a numbered list of tools, tips, steps, or recommendations — e.g., "Top 10 ITSM Tools", "5 Ways to Reduce Ticket Volume"), the SEO title MUST include the count. Use the exact number from the content (e.g., "Top 10", "5 Best", "10+"). Never write a generic title like "Best ITSM Tools for Enterprises" when the content covers "Top 10 ITSM Tools for IT Teams". The number is a key relevance and CTR signal and must appear in the title for listicle pages.
 
 | # | SEO Title | Chars | Notes |
 |---|-----------|-------|-------|
